@@ -7,4 +7,13 @@
     <color name="textPrimary">#212121</color>
     <color name="textScondary">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
+    <color name="nk">#AB82FF</color>
+    <color name="water">#4EC3E6</color>
+    <color name="digi">#24824B</color>
+    <color name="buy">#FBC67F</color>
+    <color name="pink">#FFBBFF</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
 </resources>
