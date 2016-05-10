@@ -2,34 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item android:id="@+id/nv_home" android:icon="@mipmap/ic_home_white_36dp"
+            android:title="首页" />
+        <item android:id="@+id/nv_top" android:icon="@mipmap/ic_chart_bar"
+            android:title="活跃" />
+        <item android:id="@+id/nv_group" android:icon="@mipmap/ic_apps"
+            android:title="小组" />
+        <item android:id="@+id/nv_friends" android:icon="@mipmap/ic_account_multiple"
+            android:title="动态" />
+        <item android:id="@+id/nv_person" android:icon="@mipmap/ic_account"
+            android:title="收藏" />
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/nv_setting" android:icon="@mipmap/ic_shield"
+                android:title="设置" />
+            <item android:id="@+id/nv_about" android:icon="@mipmap/ic_information"
+                android:title="关于" />
+            <item android:id="@+id/nv_logout" android:icon="@mipmap/ic_emoticon_sad"
+                android:title="退出登录" />
         </menu>
     </item>
 

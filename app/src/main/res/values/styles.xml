@@ -3,18 +3,64 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
-
-    <style name="AppTheme.NoActionBar">
+    <style name="PearTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/pearPrimary</item>
+        <item name="colorPrimaryDark">@color/eyeDark</item>
+        <item name="colorAccent">@color/pearAccent</item>
+    </style>
+    <style name="EyeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/eyePrimary</item>
+        <item name="colorPrimaryDark">@color/eyeDark</item>
+        <item name="colorAccent">@color/eyeAccent</item>
+    </style>
+    <style name="CheekTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/cheekPrimary</item>
+        <item name="colorPrimaryDark">@color/cheekDark</item>
+        <item name="colorAccent">@color/cheekAccent</item>
+    </style>
+    <style name="SkyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/skyPrimary</item>
+        <item name="colorPrimaryDark">@color/skyPrimary</item>
+        <item name="colorAccent">@color/skyAccent</item>
+    </style>
+    <style name="MalusTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/malusPrimary</item>
+        <item name="colorPrimaryDark">@color/malusDark</item>
+        <item name="colorAccent">@color/malusAccent</item>
+    </style>
+    <style name="GrassTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/grassPrimary</item>
+        <item name="colorPrimaryDark">@color/grassDark</item>
+        <item name="colorAccent">@color/grassAccent</item>
+    </style>
+    <style name="MumTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/mumPrimary</item>
+        <item name="colorPrimaryDark">@color/mumDark</item>
+        <item name="colorAccent">@color/mumAccent</item>
+    </style>
+    <style name="PearTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:textColorPrimary">@color/pearAccent</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
 
 </resources>

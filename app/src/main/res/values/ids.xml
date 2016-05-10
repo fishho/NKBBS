@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="ggroup"></item>
+    <item type="id" name="user"></item>
+    <item type="id" name="article"></item>
+    <item type="id" name="simple_title"></item>
+</resources>

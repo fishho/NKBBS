@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9C27B0</color>
-    <color name="colorPrimaryDark">#7B1FA2</color>
-    <color name="colorPrimaryLight">#E1BEE7</color>
-    <color name="colorAccent">#7C4DFF</color>
-    <color name="textPrimary">#212121</color>
-    <color name="textScondary">#727272</color>
-    <color name="colorDivider">#B6B6B6</color>
-    <color name="nk">#AB82FF</color>
-    <color name="water">#4EC3E6</color>
-    <color name="digi">#24824B</color>
-    <color name="buy">#FBC67F</color>
-    <color name="pink">#FFBBFF</color>
+    <color name="nk">#87ab82ff</color>
+    <color name="water">#874ec3e6</color>
+    <color name="truewater">#b54cc4f9</color>
+    <color name="book">#de0233e6</color>
+    <color name="digi">#8724824b</color>
+    <color name="common">#bebebe</color>
+    <color name="buy">#87fbc67f</color>
+    <color name="golden">#BAFFB70E</color>
+    <color name="truebuy">#878E5203</color>
+    <color name="pink">#87ffbbff</color>
+    <color name="truepink">#e1ef92ef</color>
+    <color name="red">#5AC11549</color>
+    <color name="truered">#F7D90B19</color>
+    <color name="black">#97000000</color>
+    <color name="trueblack">#FF000000</color>
+    <color name="primary">#9C27B0</color>
+    <color name="primary_dark">#7B1FA2</color>
+    <color name="primary_light">#E1BEE7</color>
+    <color name="accent">#7C4DFF</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="comonbackground">#64cccbcb</color>
+    <color name="bottombackground">#88cccbcb</color>
+    <color name="black_overlay">#66000000</color>
+
+    <!--梨花白-->
+    <color name="pearPrimary">#ffffff</color>
+    <color name="pearDark">#00ffffff</color>
+    <color name="pearAccent">#c2f5ca15</color>
+    <!--蛾眉黛-->
+    <color name ="eyePrimary">#543c3c</color>
+    <color name="eyeDark">#c2050303</color>
+    <color name="eyeAccent">#c2452d2d</color>
+    <!--香腮雪-->
+    <color name ="cheekPrimary">#f4e2f0</color>
+    <color name="cheekDark">#c2f5daef</color>
+    <color name="cheekAccent">#efffe0eb</color>
+    <!--没蹄绿-->
+    <color name ="grassPrimary">#6dc437</color>
+    <color name="grassDark">#c244871a</color>
+    <color name="grassAccent">#c25dae2a</color>
+    <!--海棠红-->
+    <color name ="malusPrimary">#dc111b</color>
+    <color name="malusDark">#c2df3050</color>
+    <color name="malusAccent">#c2ed0b62</color>
+    <!--云天碧-->
+    <color name ="skyPrimary">#66beea</color>
+    <color name="skyDark">#a01b79f5</color>
+    <color name="skyAccent">#ba4ea0f2</color>
+    <!--贴花黄-->
+    <color name ="mumPrimary">#ffef76</color>
+    <color name="mumDark">#e0f5ee1b</color>
+    <color name="mumAccent">#baf2e44e</color>
+    <!--月异-->
+    <color name ="darkPrimary">#4b4b4a</color>
+    <color name="darkDark">#e0151514</color>
+    <color name="darkAccent">#ba353433</color>
 </resources>

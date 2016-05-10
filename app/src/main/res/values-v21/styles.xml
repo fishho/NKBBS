@@ -1,9 +1,15 @@
-<resources>
-
+<resources>>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    </style>
+
+    <style name="PearTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/pearPrimary</item>
+        <item name="colorPrimaryDark">@color/pearDark</item>
+        <item name="colorAccent">@color/pearAccent</item>
     </style>
 </resources>

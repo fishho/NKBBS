@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.cfish.rvb.fragment.TopicFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topic_rv">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <com.cfish.rvb.view.MyProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progressbar_height"
+        android:id="@+id/progressbar"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/primary"
+    tools:context="com.cfish.rvb.SplashActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/welcome_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        fresco:placeholderImage="@mipmap/n18">
+    </com.facebook.drawee.view.SimpleDraweeView>
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/hello"
+        android:layout_gravity="center"
+        android:textSize="24sp"
+        android:textColor="@color/icons"/>
+
+</FrameLayout>
