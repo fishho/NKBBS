@@ -124,12 +124,12 @@ public class UserInfoActivity extends AppCompatActivity {
         HttpUtil.post(CommonData.userURL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.d("Dish", "userInfo " + responseString);
+                Log.d(TAG, "get userinfo FF " + responseString);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("Dish", "userInfo " + responseString);
+                Log.d(TAG, "get userInfo SS " + responseString);
                 JSONObject resp = JSON.parseObject(responseString);
 
                 UserInfo info = parseUserInfo(resp);
@@ -148,15 +148,15 @@ public class UserInfoActivity extends AppCompatActivity {
      *
      */
     private void jsoupData() {
-        HttpUtil.get("http://bbs.nankai.edu.cn/wap/user/" + user_id, new TextHttpResponseHandler() {
+        HttpUtil.get(CommonData.wapUser + user_id, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.d("Dfish", "personal page FF" + responseString);
+                Log.d(TAG, "personal page FF" + responseString);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("Dfish", "personal page SS");
+                Log.d(TAG, "personal page SS");
                 List<String> actionList = new ArrayList<String>();
                 Document doc = Jsoup.parse(responseString);
                 Element head = doc.select("img.img-rounded").first();
@@ -164,7 +164,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 Elements my_news = doc.select("div.my_news");
                 Elements privacys = doc.getElementsByClass("info_item");
                 String gender = privacys.get(0).text().substring(3);
-                Log.d("Dfish", gender + (gender.equals("男")));
+                Log.d(TAG, gender + (gender.equals("男")));
                 if (gender.equals("男")) {
                     gender_img.setImageURI(Uri.parse("res:// /" + R.mipmap.ic_gender_male));
                 } else if (gender.equals("女")) {
@@ -175,11 +175,11 @@ public class UserInfoActivity extends AppCompatActivity {
                 score.setText(infos.get(1).text());
                 for (Element element : my_news) {
                     actionList.add(element.text());
-                    Log.d("Dfish", "my_news" + element.text());
+                    Log.d(TAG, "my_news" + element.text());
                 }
                 //doc.getElementsByClass("");
                 String headUrl = head.attr("src");
-                Log.d("Dfish", "try " + headUrl + "   " + head.toString());
+                Log.d(TAG, "try " + headUrl + "   " + head.toString());
                 if (!headUrl.equals("http://bbs.nankai.edu.cn/data/uploads/avatar/000/00/00/xh.jpg")) {
                     user_img.setImageURI(Uri.parse(headUrl.replace("small", "big")));
                 }

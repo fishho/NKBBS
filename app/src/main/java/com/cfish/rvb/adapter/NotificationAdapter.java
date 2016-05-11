@@ -48,6 +48,7 @@ public class NotificationAdapter extends RecyclerView.Adapter implements View.On
             StringBuilder stringBuilder = new StringBuilder();
             int status = Integer.parseInt(news.getStatus());
             switch (status) {
+                // many types of message
                 case 1:
                     break;
                 case 2:

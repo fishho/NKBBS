@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cfish.rvb.bean.Group;
+import com.cfish.rvb.util.CommonData;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import android.content.Context;
@@ -57,7 +58,7 @@ public class GroupAdapter extends Adapter<ViewHolder> implements OnClickListener
     @Override
     public void onBindViewHolder(ViewHolder vh, int position) {
         // TODO Auto-generated method stub
-        String url = "http://bbs.nankai.edu.cn/data/uploads/cover/group/"+mGroups.get(position).getGid()+".jpg";
+        String url = CommonData.groupCover+mGroups.get(position).getGid()+".jpg";
         ItemHolder itemholder = (ItemHolder) vh;
         itemholder.draweeView.setImageURI(Uri.parse(url));
         Log.d("url",url);

@@ -50,7 +50,7 @@ public class MessageActivity extends AppCompatActivity {
         paramsGet.add("uid", uid);
         paramsGet.add("type", "get_onemsg");
         paramsGet.add("currpage", "1");
-        paramsGet.add("friendid","28072");
+        paramsGet.add("friendid","28072");//friendid id should get from intent
         HttpUtil.post(CommonData.userURL, paramsGet, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

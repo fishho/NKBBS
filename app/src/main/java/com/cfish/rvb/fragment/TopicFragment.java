@@ -46,6 +46,7 @@ import cz.msebera.android.httpclient.Header;
 public class TopicFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "TopicFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,7 +54,6 @@ public class TopicFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private static final String TAG = "TopicFragment";
     private RequestParams params;
     private TopicAdapter adapter;
     private int currentPage = 1;
@@ -113,9 +113,6 @@ public class TopicFragment extends Fragment {
         swipeRefresh = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh);
         topicRv = (RecyclerView)view.findViewById(R.id.topic_rv);
         progressBar = (MyProgressBar)view.findViewById(R.id.progressbar);
-//        swipeRefresh.setColorSchemeColors(android.R.color.holo_blue_light,android.R.color.holo_red_light,
-//                android.R.color.holo_orange_dark,android.R.color.holo_green_light,android.R.color.holo_purple);
-
         swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
                 android.R.color.holo_orange_dark, android.R.color.holo_green_light, android.R.color.holo_purple);
         topicRv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -162,9 +159,9 @@ public class TopicFragment extends Fragment {
     }
 
     public void getData(final int page) {
-        Log.d("Dfish","TopicFragment page = "+page);
+        Log.d(TAG,"TopicFragment page = "+page);
         String uid=  (CommonData.user.getUid()== null)? "-1":CommonData.user.getUid() ;
-        Log.d("Dfish","TopicFragment uid = "+uid);
+        Log.d(TAG,"TopicFragment uid = "+uid);
         params = new RequestParams();
         params.add("uid", uid);
         params.add("type", "get_group_article_list");
@@ -176,12 +173,12 @@ public class TopicFragment extends Fragment {
         HttpUtil.post(CommonData.groupURL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.d("Dfish", "TopicFrament post fail ,status code " + statusCode);
+                Log.d(TAG, "TopicFrament post fail ,status code " + statusCode);
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.d("Dfish", "TopicFragment post success ,response is "+responseString);
+                Log.d(TAG, "TopicFragment post success ,response is "+responseString);
                 isLoading = false;
                 progressBar.setVisibility(View.GONE);
                 if (page == 1) {

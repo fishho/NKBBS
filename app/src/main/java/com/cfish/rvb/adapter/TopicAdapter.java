@@ -183,24 +183,17 @@ public class TopicAdapter extends Adapter<ViewHolder> implements View.OnClickLis
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		//Intent intent = new Intent();
 		if(mOnItemClickListener != null) {
             switch (v.getId()) {
                 case R.id.author:
                     mOnItemClickListener.onItemClick(v, (String) v.getTag(R.id.user),2);
-					//intent.setClass(mContext, UserInfoActivity.class);
                     break;
                 case R.id.head:
                     mOnItemClickListener.onItemClick(v, (String)v.getTag(R.id.ggroup),1);
                     Log.d("Dfish", (String) v.getTag(R.id.ggroup)+"click on head");
-					//intent.setClass(mContext, GroupActivity.class);
-
                     break;
                 default:
                     mOnItemClickListener.onItemClick(v, (String)v.getTag(R.id.article),0);
-					//intent.setClass(mContext, ArticleActivity.class);
-					//intent.putExtra("g_a_id",)
                     break;
             }
 

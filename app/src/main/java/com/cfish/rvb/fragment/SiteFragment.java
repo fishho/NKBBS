@@ -36,6 +36,7 @@ import cz.msebera.android.httpclient.Header;
 public class SiteFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "SiteFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -112,7 +113,7 @@ public class SiteFragment extends Fragment {
 
     public void getDada() {
         String uid = (CommonData.user.getUid() == null)? "-1" : CommonData.user.getUid();
-        Log.d("Dfish", "SiteFragment uid = " + uid);
+        Log.d(TAG, "SiteFragment uid = " + uid);
         params = new RequestParams();
         params.add("uid",uid);
         params.add("type","get_site_articles");
@@ -120,7 +121,7 @@ public class SiteFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.d("Dfish", "SiteFragment SS " + response);
+                Log.d(TAG, "SiteFragment SS " + response);
                 //List<Topic> topics = JsonParse.parseGroupArticles(JSON.parseObject(responseString));
 //                for (Topic topic : topics) {
 //                    topicList.add(topic);
@@ -142,7 +143,7 @@ public class SiteFragment extends Fragment {
                         newsList.add(map);
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e(TAG,e.getMessage(),e);
                 }
 
 
@@ -152,7 +153,7 @@ public class SiteFragment extends Fragment {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.d("Dfish", " siteFragment FF" + errorResponse);
+                Log.d(TAG, " siteFragment FF" + errorResponse);
             }
         });
 
@@ -164,7 +165,7 @@ public class SiteFragment extends Fragment {
         if(isVisibleToUser){
             initData();
         } else {
-            Log.d("Dfish","SiteFragment is not visible");
+            Log.d(TAG,"SiteFragment is not visible");
         }
     }
 }

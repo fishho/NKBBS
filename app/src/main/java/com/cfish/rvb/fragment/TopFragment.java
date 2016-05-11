@@ -38,6 +38,7 @@ import cz.msebera.android.httpclient.Header;
 public class TopFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String TAG = "TopFragment";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -118,7 +119,7 @@ public class TopFragment extends Fragment {
             public void onClick(View v) {
                 params.remove("time");
                 params.add("time","day");
-                Log.d("Dfish","get day top");
+                Log.d(TAG,"get day top");
                 getDada(false); //adapter refreshData;
                 day.setTextColor(getResources().getColor(R.color.golden));
                 week.setTextColor(getResources().getColor(android.R.color.white));
@@ -130,7 +131,7 @@ public class TopFragment extends Fragment {
             public void onClick(View v) {
                 params.remove("time");
                 params.add("time", "week");
-                Log.d("Dfish","get week top");
+                Log.d(TAG,"get week top");
                 getDada(false); //adapter refreshData;
                 week.setTextColor(getResources().getColor(R.color.golden));
                 day.setTextColor(getResources().getColor(android.R.color.white));
@@ -142,7 +143,7 @@ public class TopFragment extends Fragment {
             public void onClick(View v) {
                 params.remove("time");
                 params.add("time","month");
-                Log.d("Dfish","get month top");
+                Log.d(TAG,"get month top");
                 getDada(false); //adapter refreshData;
                 month.setTextColor(getResources().getColor(R.color.golden));
                 week.setTextColor(getResources().getColor(android.R.color.white));
@@ -153,13 +154,13 @@ public class TopFragment extends Fragment {
 
     public void getDada(final boolean flag) {
         String uid = (CommonData.user.getUid() == null)? "-1" : CommonData.user.getUid();
-        Log.d("Dfish"," TOP uid = "+uid);
+        Log.d(TAG,"TOP uid = "+uid);
         params.add("uid",uid);
         params.add("type","get_topten");
         HttpUtil.post(CommonData.groupURL,params, new TextHttpResponseHandler(){
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.d("Dfish Top", "FF" + statusCode + headers);
+                Log.d(TAG, "FF" + statusCode + headers);
             }
 
             @Override
@@ -221,7 +222,7 @@ public class TopFragment extends Fragment {
         if(isVisibleToUser){
             initData();
         } else {
-            Log.d("Dfish","TopFragment is not visible");
+            Log.d(TAG,"TopFragment is not visible");
         }
     }
 }

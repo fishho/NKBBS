@@ -6,6 +6,7 @@ import android.view.View;
 
 /**
  * Created by GKX100217 on 2016/3/14.
+ *
  */
 //public class BaseFragment extends Fragment {
 //    private static final String TAG = "BaseFragment";

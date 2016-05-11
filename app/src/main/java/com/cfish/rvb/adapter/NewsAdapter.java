@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cfish.rvb.R;
+import com.cfish.rvb.util.CommonData;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.w3c.dom.Text;
@@ -73,7 +74,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (map == null) {
             return ;
         }
-        itemholder.head.setImageURI(Uri.parse("http://bbs.nankai.edu.cn/data/uploads/cover/site/"+map.get("sid")+".jpg"));
+        itemholder.head.setImageURI(Uri.parse(CommonData.siteCover+map.get("sid")+".jpg"));
         Log.d("Dfish", map.get("sid"));
         itemholder.title.setText(map.get("name"));
         itemholder.reply.setText(map.get("reply"));
