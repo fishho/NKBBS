@@ -1,5 +1,6 @@
 package com.cfish.rvb;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -53,6 +55,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private ActionAdapter adaptera;
     private SimpleDraweeView user_img,gender_img;
     private TextView rank,signature,score;
+    private Button sendMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,15 @@ public class UserInfoActivity extends AppCompatActivity {
         rank = (TextView)findViewById(R.id.rank);
         signature = (TextView)findViewById(R.id.signature);
         score = (TextView)findViewById(R.id.score);
+        sendMessage = (Button) findViewById(R.id.send_message);
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toMessage = new Intent();
+                toMessage.setClass(UserInfoActivity.this,MessageActivity.class);
+                startActivity(toMessage);
+            }
+        });
 //        ControllerListener listener = new BaseControllerListener(){
 //            @Override
 //            public void onFailure(String id, Throwable throwable) {
@@ -110,13 +122,13 @@ public class UserInfoActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-        //initData();
+        initData();
         jsoupData();
     }
 
     private void initData() {
         String uid=  (CommonData.user.getUid()== null)? "-1":CommonData.user.getUid() ;
-        Log.d("Dfish", "uid = " + uid);
+        Log.d(TAG, "uid = " + uid);
         params = new RequestParams();
         params.add("uid", uid);
         params.add("id", user_id);
@@ -130,14 +142,14 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d(TAG, "get userInfo SS " + responseString);
-                JSONObject resp = JSON.parseObject(responseString);
-
-                UserInfo info = parseUserInfo(resp);
-                signature.setText(info.getSignature());
-                List<Behavior> behaviorList = info.getBehavior();
-                behaviorRv.setLayoutManager(new LinearLayoutManager(UserInfoActivity.this));
-                adapter = new UserInfoAdapter(UserInfoActivity.this,behaviorList);
-                behaviorRv.setAdapter(adapter);
+//                JSONObject resp = JSON.parseObject(responseString);
+//
+//                UserInfo info = parseUserInfo(resp);
+//                signature.setText(info.getSignature());
+//                List<Behavior> behaviorList = info.getBehavior();
+//                behaviorRv.setLayoutManager(new LinearLayoutManager(UserInfoActivity.this));
+//                adapter = new UserInfoAdapter(UserInfoActivity.this,behaviorList);
+//                behaviorRv.setAdapter(adapter);
 
             }
         });

@@ -36,6 +36,11 @@
                 android:layout_marginLeft="60dp"
                 app:roundAsCircle="true"
                 app:placeholderImage="@mipmap/ic_gender_transgender" />
+            <Button
+                android:id="@+id/send_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/private_message"/>
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
