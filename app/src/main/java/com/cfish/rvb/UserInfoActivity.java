@@ -3,6 +3,7 @@ package com.cfish.rvb;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private SimpleDraweeView user_img,gender_img;
     private TextView rank,signature,score;
     private Button sendMessage;
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,15 +78,26 @@ public class UserInfoActivity extends AppCompatActivity {
         rank = (TextView)findViewById(R.id.rank);
         signature = (TextView)findViewById(R.id.signature);
         score = (TextView)findViewById(R.id.score);
-        sendMessage = (Button) findViewById(R.id.send_message);
-        sendMessage.setOnClickListener(new View.OnClickListener() {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent toMessage = new Intent();
+                toMessage.putExtra("title",title);
+                toMessage.putExtra("friendId",user_id);
                 toMessage.setClass(UserInfoActivity.this,MessageActivity.class);
                 startActivity(toMessage);
             }
         });
+//        sendMessage = (Button) findViewById(R.id.send_message);
+//        sendMessage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent toMessage = new Intent();
+//                toMessage.setClass(UserInfoActivity.this,MessageActivity.class);
+//                startActivity(toMessage);
+//            }
+//        });
 //        ControllerListener listener = new BaseControllerListener(){
 //            @Override
 //            public void onFailure(String id, Throwable throwable) {

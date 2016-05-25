@@ -8,7 +8,7 @@
 
     <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
         android:fitsSystemWindows="true" android:layout_height="@dimen/app_bar_height"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_width="match_parent" android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout android:id="@+id/toolbar_layout"
             android:fitsSystemWindows="true" android:layout_width="match_parent"
@@ -40,7 +40,8 @@
                 android:id="@+id/send_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/private_message"/>
+                android:text="@string/private_message"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
@@ -84,16 +85,7 @@
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin" app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" android:src="@mipmap/ic_pencil" />
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/behavior_RV"
-        android:layout_margin="30dp"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_behavior ="com.cfish.rvb.MyFabBehavior"
-        app:backgroundTint="@color/primary"
-        android:src="@mipmap/ic_pencil" />
+        app:layout_anchorGravity="bottom|end" android:src="@mipmap/ic_pencil"
+        android:background="#d46d6d" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -25,13 +25,15 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class MessageActivity extends AppCompatActivity {
+    private static final String TAG = MessageActivity.class.getSimpleName();
     private RequestParams paramsGet,paramsPost;
     private MessageAdapter adapter;
     private RecyclerView messageRv;
     private List<Letter> letters;
     private ImageButton post;
     private EditText content;
-    private String frendid;
+    private String frendId;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,11 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         messageRv = (RecyclerView)findViewById(R.id.message_RecyclerView);
         post = (ImageButton)findViewById(R.id.post);
+        frendId = getIntent().getExtras().getString("friendId");
+        title = getIntent().getExtras().getString("title");
+        if (!title.isEmpty()) {
+            setTitle(title);
+        }
         getMsg();
 
     }
@@ -50,7 +57,7 @@ public class MessageActivity extends AppCompatActivity {
         paramsGet.add("uid", uid);
         paramsGet.add("type", "get_onemsg");
         paramsGet.add("currpage", "1");
-        paramsGet.add("friendid","28072");//friendid id should get from intent
+        paramsGet.add("friendid",frendId);//friendid id should get from intent 28072沫姐
         HttpUtil.post(CommonData.userURL, paramsGet, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -67,9 +74,11 @@ public class MessageActivity extends AppCompatActivity {
 //                    Log.d("Dfish","Message sendid "+name+letter.getSendid());
 //
 //                }
-                adapter = new MessageAdapter(MessageActivity.this, letters);
-                messageRv.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
-                messageRv.setAdapter(adapter);
+                if (letters != null) {
+                    adapter = new MessageAdapter(MessageActivity.this, letters);
+                    messageRv.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
+                    messageRv.setAdapter(adapter);
+                }
             }
         });
     }
@@ -80,7 +89,7 @@ public class MessageActivity extends AppCompatActivity {
         Log.d("Dfish", "Message uid = " + uid);
         paramsPost.add("uid", uid);
         paramsPost.add("type", "send_msg");
-        paramsPost.add("recid", frendid);
+        paramsPost.add("recid", frendId);
         paramsPost.put("content", Html.toHtml(content.getText()));
         paramsPost.add("isnew", "new");
         HttpUtil.post(CommonData.userURL, paramsPost, new TextHttpResponseHandler() {

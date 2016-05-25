@@ -191,7 +191,7 @@ public class GroupActivity extends AppCompatActivity {
                 adapter.setOnItemClickListener(new TopicAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View v, String data, int flag) {
-                        String[] s=data.split("`",2);
+                        String[] s=data.split("`");
                         Intent intent = new Intent();
                         Bundle localBundle = new Bundle();
                         switch (flag) {
