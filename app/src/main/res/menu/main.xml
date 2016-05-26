@@ -14,9 +14,9 @@
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_concern"
-        android:title="@string/action_concern"
-        android:icon="@mipmap/ic_heart_outline1"
+        android:id="@+id/action_message"
+        android:title="@string/action_message"
+        android:icon="@mipmap/ic_star_outline"
         android:orderInCategory="90"
         app:showAsAction="ifRoom" />
     <item

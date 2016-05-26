@@ -181,8 +181,8 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.action_settings:
                 return true;
-            case R.id.action_concern:
-                item.setIcon(R.mipmap.ic_heart_outline1);
+            case R.id.action_message:
+                item.setIcon(R.mipmap.ic_star_outline);
                 if (haveMsg) {
                     Intent intent = new Intent(this,NotificationListActivity.class);
                     intent.putExtra("news",news);
