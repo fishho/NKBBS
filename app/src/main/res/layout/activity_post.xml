@@ -23,14 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
-        android:src="@mipmap/ic_emoticon_happy"/>
+        android:src="@mipmap/ic_picture"/>
     <ImageButton
         android:id="@+id/anonymous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
         android:layout_toRightOf="@id/picture"
-        android:src="@mipmap/ic_emoticon_sad" />
+        android:src="@mipmap/ic_shield_outline" />
     <ImageButton
         android:id="@+id/post"
         android:layout_width="wrap_content"

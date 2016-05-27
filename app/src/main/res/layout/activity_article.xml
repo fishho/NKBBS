@@ -43,13 +43,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_emoticon_happy"/>
+            android:src="@mipmap/ic_picture"/>
         <ImageButton
             android:id="@+id/noname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_emoticon_sad"/>
+            android:src="@mipmap/ic_shield_outline"/>
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"

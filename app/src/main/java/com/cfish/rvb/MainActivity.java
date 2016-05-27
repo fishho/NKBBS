@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
         MenuItem concern = menu.findItem(R.id.action_concern);
         Log.d("Dfish","haveMsg"+haveMsg);
         if (haveMsg){
-            concern.setIcon(R.mipmap.ic_weather_sunny);
+            concern.setIcon(R.mipmap.ic_bell_ring_outline);
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 return true;
             case R.id.action_message:
-                item.setIcon(R.mipmap.ic_star_outline);
+                item.setIcon(R.mipmap.ic_bell_outline);
                 if (haveMsg) {
                     Intent intent = new Intent(this,NotificationListActivity.class);
                     intent.putExtra("news",news);
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity
             msgIntent.setClass(this,MessageActivity.class);
             startActivity(msgIntent);
         } else if (id == R.id.nv_logout) {
-
+            //do logout things
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

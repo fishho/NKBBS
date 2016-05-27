@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nv_home" android:icon="@mipmap/ic_home_white_36dp"
+        <item android:id="@+id/nv_home" android:icon="@mipmap/ic_home"
             android:title="首页" />
         <item android:id="@+id/nv_top" android:icon="@mipmap/ic_chart_bar"
             android:title="活跃" />
@@ -16,11 +16,11 @@
 
     <item android:title="Communicate">
         <menu>
-            <item android:id="@+id/nv_setting" android:icon="@mipmap/ic_shield"
+            <item android:id="@+id/nv_setting" android:icon="@mipmap/ic_cog"
                 android:title="设置" />
             <item android:id="@+id/nv_about" android:icon="@mipmap/ic_information"
                 android:title="关于" />
-            <item android:id="@+id/nv_logout" android:icon="@mipmap/ic_emoticon_sad"
+            <item android:id="@+id/nv_logout" android:icon="@mipmap/ic_power"
                 android:title="退出登录" />
         </menu>
     </item>
