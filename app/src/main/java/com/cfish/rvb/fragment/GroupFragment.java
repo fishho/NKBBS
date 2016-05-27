@@ -1,6 +1,7 @@
 package com.cfish.rvb.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
+import com.cfish.rvb.GroupActivity;
 import com.cfish.rvb.R;
 import com.cfish.rvb.adapter.GroupAdapter;
 import com.cfish.rvb.bean.Group;
@@ -176,6 +178,16 @@ public class GroupFragment extends Fragment {
                 GroupAdapter adapter = new GroupAdapter(getActivity(),groupList);
                 groupRv.setAdapter(adapter);
 
+                adapter.setOnItemClickListener(new GroupAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, String data) {
+                        String[] s=data.split("`");
+                        Intent toGroup = new Intent(getActivity(), GroupActivity.class);
+                        toGroup.putExtra("gid", s[0]);
+                        toGroup.putExtra("title",s[1]);
+                        getActivity().startActivity(toGroup);
+                    }
+                });
 
             }
         });

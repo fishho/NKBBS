@@ -4,13 +4,13 @@
     <!--<solid android:color="@color/eyeDark" />-->
     <gradient android:type="linear"
         android:gradientRadius="5dp"
-        android:startColor="@color/water"
+        android:startColor="@color/icons"
         android:centerColor="@color/icons"
-        android:endColor="@color/water">
+        android:endColor="@color/icons">
     </gradient>
     <stroke
         android:width="2dp"
-        android:color="@color/nk" />
+        android:color="@color/accent" />
     <corners android:topLeftRadius="5dp"
         android:topRightRadius="5dp"
         android:bottomRightRadius="5dp"

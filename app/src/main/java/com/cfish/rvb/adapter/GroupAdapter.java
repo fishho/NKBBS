@@ -62,7 +62,9 @@ public class GroupAdapter extends Adapter<ViewHolder> implements OnClickListener
         ItemHolder itemholder = (ItemHolder) vh;
         itemholder.draweeView.setImageURI(Uri.parse(url));
         Log.d("url",url);
-        itemholder.itemView.setTag(mGroups.get(position).getGid());
+        //this line can be optimised
+        itemholder.itemView.setTag(mGroups.get(position).getGid()+"`"+mGroups.get(position).getName());
+
         itemholder.name.setText(mGroups.get(position).getName());
     }
 

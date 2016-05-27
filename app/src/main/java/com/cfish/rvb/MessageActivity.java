@@ -39,6 +39,8 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         messageRv = (RecyclerView)findViewById(R.id.message_RecyclerView);
         post = (ImageButton)findViewById(R.id.post);
         frendId = getIntent().getExtras().getString("friendId");

@@ -113,11 +113,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.noname :
                 if(!noNameChecked) {
                     //v.setBackground(getResources().getDrawable(R.mipmap.ic_arrow_down));
-                    noName.setImageResource(R.mipmap.ic_arrow_down);
+                    noName.setImageResource(R.mipmap.ic_shield);
                     noNameChecked = true;
                 } else {
                     //v.setBackground(getResources().getDrawable(R.mipmap.ic_emoticon_neutral));
-                    noName.setImageResource(R.mipmap.ic_emoticon_neutral);
+                    noName.setImageResource(R.mipmap.ic_shield_outline);
                     noNameChecked = false;
                 }
 

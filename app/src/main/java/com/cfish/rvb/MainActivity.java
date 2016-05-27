@@ -159,10 +159,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem concern = menu.findItem(R.id.action_concern);
+        MenuItem message= menu.findItem(R.id.action_message);
         Log.d("Dfish","haveMsg"+haveMsg);
         if (haveMsg){
-            concern.setIcon(R.mipmap.ic_bell_ring_outline);
+            message.setIcon(R.mipmap.ic_bell_ring_outline);
         }
         return super.onPrepareOptionsMenu(menu);
     }

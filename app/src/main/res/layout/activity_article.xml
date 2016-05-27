@@ -31,8 +31,9 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="2dp"
         android:orientation="horizontal"
-        android:background="@color/bottombackground">
+        android:background="@color/primary">
         <ProgressBar
             android:id="@+id/upload_progress"
             android:layout_width="wrap_content"
@@ -43,18 +44,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_picture"/>
+            android:src="@mipmap/ic_picture"
+            android:background="@android:color/transparent"/>
         <ImageButton
             android:id="@+id/noname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_shield_outline"/>
+            android:src="@mipmap/ic_shield_outline"
+            android:background="@android:color/transparent"/>
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:background="#cccbcb"
+            android:background="#e6e5e5"
             android:id="@+id/content"
             android:maxLines="8"
             android:hint="@string/content"/>
@@ -65,7 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/content"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_send"/>
+            android:src="@mipmap/ic_send"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 </RelativeLayout>
 
