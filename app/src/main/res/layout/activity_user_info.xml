@@ -35,6 +35,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="60dp"
                 app:roundAsCircle="true"
+                app:actualImageScaleType="fitCenter"
                 app:placeholderImage="@mipmap/ic_gender_transgender" />
             <Button
                 android:id="@+id/send_message"

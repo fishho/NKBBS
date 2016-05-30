@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -227,7 +228,11 @@ public class MainActivity extends AppCompatActivity
             msgIntent.setClass(this,MessageActivity.class);
             startActivity(msgIntent);
         } else if (id == R.id.nv_logout) {
-            //do logout things
+            //注销
+            SharedPreferences sharedPreferences = this.getSharedPreferences("SHARED_LOGIN",0);
+            sharedPreferences.edit().clear().commit();
+            CommonData.user.setUid("-1");
+            Log.d("Dfish",CommonData.user.getUid());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
