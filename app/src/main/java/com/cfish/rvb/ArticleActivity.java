@@ -192,6 +192,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
+                //forget this case ...
                 if (responseString.startsWith("<")) {
                     responseString = responseString.substring(responseString.indexOf("{"),responseString.length());
                 }

@@ -22,7 +22,7 @@ public class Article {
     private String Top_Ten;
     private String ever_top;
     private String anonymous;
-    private List<Tag> g_a_tags;
+    private List g_a_tags;
 
     public String getClick_num() {
         return click_num;
@@ -148,7 +148,8 @@ public class Article {
         return g_a_tags;
     }
 
-    public void setG_a_tags(List<Tag> g_a_tags) {
+    public void setG_a_tags(List g_a_tags) {
+        if (!g_a_tags.isEmpty())
         this.g_a_tags = g_a_tags;
     }
 
