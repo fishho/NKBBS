@@ -60,6 +60,7 @@
 
     <string name="signatures">我是爱南开的</string>
     <string name="noreply">还没有人回复</string>
+    <string name="uploadSuccess">图片上传成功</string>
     <!--<string name="actionConcern">关注了：</string>-->
     <!--<string name="concernSite">关注了主题站：</string>-->
     <!--<string name="atSite">在主题站：</string>-->

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.cfish.rvb.util.CommonData;
 import com.cfish.rvb.util.HttpUtil;
@@ -29,6 +30,7 @@ import cz.msebera.android.httpclient.Header;
 public class PostActivity extends AppCompatActivity implements View.OnClickListener {
     private String gid,canAnonymous; //
     private ImageButton picture,anonymous,post;
+    private ProgressBar uploadProgressbar;
     private EditText name,content;
     private RequestParams params,paramsUp;
     private String formatContent,formatImg;
@@ -47,6 +49,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         post = (ImageButton)findViewById(R.id.post);
         name = (EditText)findViewById(R.id.name);
         content = (EditText)findViewById(R.id.content);
+        uploadProgressbar = (ProgressBar) findViewById(R.id.upload_progress);
         picture.setOnClickListener(this);
         post.setOnClickListener(this);
         if (canAnonymous.equals("1")) {
@@ -80,7 +83,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.picture :
-                Snackbar.make(v, "请在回复中添加图片", Snackbar.LENGTH_SHORT).show();
+                //Snackbar.make(v, "请在回复中添加图片", Snackbar.LENGTH_SHORT).show();//use new api,no need any more
                 //select pictures from local gallery,android post it to
                 //the server
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -199,6 +202,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void upImage(File file,String name){
+        uploadProgressbar.setVisibility(View.VISIBLE);
+        picture.setVisibility(View.GONE);
         paramsUp = new RequestParams();
         paramsUp.add("fileName",name);
         paramsUp.add("pictitle", name);
@@ -217,6 +222,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+                uploadProgressbar.setVisibility(View.GONE);
+                picture.setVisibility(View.VISIBLE);
                 Log.d("Dfish","upload success"+response);
                 String img = null;
                 try {

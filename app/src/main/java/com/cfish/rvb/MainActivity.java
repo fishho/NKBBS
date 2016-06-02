@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity
         view = navigationView.inflateHeaderView(R.layout.nav_header_main);
         SimpleDraweeView avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
         Log.d("Dfish","avatar"+CommonData.user.getBig_avatar());
+
+        //in tourist mode , click the head image to login
+        //in user mode ,click to open personal page
         avatar.setImageURI(Uri.parse("http://bbs.nankai.edu.cn/data/uploads/avatar/" + CommonData.user.getBig_avatar()));
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
