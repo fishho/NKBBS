@@ -40,6 +40,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.gid = getIntent().getExtras().getString("gid");
         this.canAnonymous = getIntent().getExtras().getString("canAnonymous");
         Log.d("Dfish", "PostActivity gid" + gid+ " canAnonymous" +canAnonymous);

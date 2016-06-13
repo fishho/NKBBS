@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 
 import com.alibaba.fastjson.JSON;
@@ -55,6 +59,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     private ImageButton post;
     private ImageButton noName;
     private ProgressBar progressBar,uploadProgress;
+    private LinearLayout bottom;
     private String p_g_r_id = "";
     private String g_id = "";
     private String isNoName = "0"; //是否匿名评论
@@ -88,9 +93,26 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         myReply = (EditText)findViewById(R.id.content);
         post = (ImageButton)findViewById(R.id.post);
         noName = (ImageButton)findViewById(R.id.noname);
+        bottom = (LinearLayout)findViewById(R.id.bottom);
         picture.setOnClickListener(this);
         post.setOnClickListener(this);
         noName.setOnClickListener(this);
+
+        myReply.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+//                    myReply.setVisibility(View.GONE);
+//
+//                    View popView = LayoutInflater.from(ArticleActivity.this).inflate(R.layout.popup_window, null);
+//                    PopupWindow popupWindow = new PopupWindow(popView, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
+//                            LinearLayoutCompat.LayoutParams.WRAP_CONTENT,true);
+//                    popupWindow.showAsDropDown(myReply,dip2px(ArticleActivity.this,60),-dip2px(ArticleActivity.this,60));
+//                    popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.nk));
+
+                }
+            }
+        });
         getData();
         if(g_id != null) {
             isCanAnonymous(g_id);
@@ -108,6 +130,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 intent.setType("image/*");
                 intent.putExtra("crop", true);
                 intent.putExtra("return-data", true);
+
+
                 startActivityForResult(intent,2);
                 break;
             case R.id.noname :
@@ -594,6 +618,9 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
-
+    public int dip2px(Context context, float dpValue) {
+        final float scale =  context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue* scale + 0.5f);
+    }
 
 }

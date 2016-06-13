@@ -2,7 +2,7 @@
 
     <SwitchPreference
         android:key="example_switch"
-        android:title="@string/pref_title_social_recommendations"
+        android:title="@string/no_picture_mode"
         android:summary="@string/pref_description_social_recommendations"
         android:defaultValue="true" />
 

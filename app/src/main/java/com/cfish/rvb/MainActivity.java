@@ -90,8 +90,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this,LoginActivity.class);
-                startActivityForResult(intent,0);
+                //intent.setClass(MainActivity.this,LoginActivity.class);
+                //startActivityForResult(intent,0);
+                intent.setClass(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -226,9 +228,9 @@ public class MainActivity extends AppCompatActivity
             settingIntent.setClass(this,SettingsActivity.class);
             startActivity(settingIntent);
         } else if (id == R.id.nv_about) {
-            //私信页面
+            //关于
             Intent msgIntent = new Intent();
-            msgIntent.setClass(this,MessageActivity.class);
+            msgIntent.setClass(this,AboutActivity.class);
             startActivity(msgIntent);
         } else if (id == R.id.nv_logout) {
             //注销

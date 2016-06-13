@@ -3,7 +3,7 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header android:fragment="com.cfish.rvb.SettingsActivity$GeneralPreferenceFragment"
-        android:title="@string/pref_header_general" android:icon="@mipmap/ic_tooltip" />
+        android:title="@string/pref_header_general" android:icon="@mipmap/ic_cancel" />
 
     <header android:fragment="com.cfish.rvb.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications"
