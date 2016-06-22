@@ -22,6 +22,7 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
         android:visibility="gone" app:layout_behavior = "com.cfish.rvb.MyFabBehavior"
+        android:background="?android:selectableItemBackground"
         app:backgroundTint="@color/digi"
         android:src="@mipmap/ic_pencil"/>
 

@@ -35,6 +35,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private RequestParams params,paramsUp;
     private String formatContent,formatImg;
     private String nameContent;
+    private String originContent, finalContent;
     private File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,16 +174,20 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void postArticleNew() {
+
+        originContent = content.getText().toString();
+        finalContent = originContent +
+                "<p style=\"text-align: right;\"><span style=\"font-size: 12px; color: rgb(79, 40, 73);\">——来自<a style=\"font-size: 12px;color: #3eb249;\" href=\"https://itunes.apple.com/cn/app/id955237216\" class=\"ui-link\">我爱南开BBS-iOS至尊客户端</a></span></p>";
+
         //此处uid的问题，只是从cookie?
         params.add("thing","post_article");
         params.add("gid",gid);
         params.add("name",name.getText().toString());
-        params.add("content",content.getText().toString());
+        params.add("content",finalContent);
         params.add("anonymous","false");//设置匿名选项
         params.add("vid","-1"); //位置参数
         params.add("tags","");
         params.add("edit","0"); //0表示新文章，其他对应g_a_id;
-
         HttpUtil.post("http://bbs.nankai.edu.cn/group/action", params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

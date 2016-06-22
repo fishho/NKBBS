@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -367,8 +368,11 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         paramsPost.add("uid", uid);
         StringBuilder out = new StringBuilder();
         int len = myReply.getText().length();
+        final String replyContent = myReply.getText().toString();
         tryEncode(out, myReply.getText(), 0, len);
         paramsPost.put("content", out);
+
+        myReply.setText("");
 
         //Log.d("Dfish", "uid" + uid + "g_a_id" + g_a_id + " " + out.toString());
         Log.d("Dfish", paramsPost.toString());
@@ -380,16 +384,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, org.json.JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.d("Dfish","postReply"+errorResponse);
+                myReply.setText(replyContent);
+                Snackbar.make(myReply,"回复失败",Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 Log.d("Dfish","postReply"+response);
-                myReply.setText("");
+                //myReply.setText("");
                 //getData();
                 //adapter.notifyDataSetChanged();
-
+                Toast.makeText(ArticleActivity.this, "回复成功",Toast.LENGTH_SHORT).show();
                 HttpUtil.post(CommonData.groupURL, params, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

@@ -63,6 +63,7 @@
     <string name="uploadSuccess">图片上传成功</string>
     <string name="about">关于</string>
     <string name="myself">关于自己</string>
+    <string name="colorPicker">颜色选择</string>
     <!--<string name="actionConcern">关注了：</string>-->
     <!--<string name="concernSite">关注了主题站：</string>-->
     <!--<string name="atSite">在主题站：</string>-->
@@ -146,6 +147,10 @@
         <item>没蹄绿</item>
         <item>梨花白</item>
         <item>蛾眉黛</item>
+        <item>香腮雪</item>
+        <item>贴花黄</item>
+        <item>海棠红</item>
+
         <item>香腮雪</item>
         <item>贴花黄</item>
         <item>海棠红</item>

@@ -60,4 +60,17 @@
     <color name ="darkPrimary">#4b4b4a</color>
     <color name="darkDark">#e0151514</color>
     <color name="darkAccent">#ba353433</color>
+    
+    <array name="themeColors">
+        <item>@color/primary</item>
+        <item>@color/pearPrimary</item>
+        <item>@color/eyePrimary</item>
+        <item>@color/cheekPrimary</item>
+        <item>@color/grassPrimary</item>
+        <item>@color/malusPrimary</item>
+        <item>@color/skyPrimary</item>
+        <item>@color/mumPrimary</item>
+        <item>@color/darkPrimary</item>
+
+    </array>
 </resources>
