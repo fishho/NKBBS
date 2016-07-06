@@ -41,7 +41,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ColorPickerDialog.Callback {
     private TabLayout main_tabs;
     private ViewPager main_pager;
     private View view;
@@ -287,6 +287,17 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void changeTheme() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("curTheme",0);
+        new ColorPickerDialog().show(this, sharedPreferences.getInt("color",1));
+    }
+
+    @Override
+    public void onColorSelection(int index, int color, int darker) {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("curTheme",0);
+        sharedPreferences.edit().putInt("color",index).commit();
+        recreate();
+    }
 
     public class MsgReceiver extends BroadcastReceiver {
         @Override
