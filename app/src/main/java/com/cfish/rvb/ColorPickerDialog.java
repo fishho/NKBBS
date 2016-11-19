@@ -33,45 +33,7 @@ public class ColorPickerDialog extends DialogFragment implements View.OnClickLis
         void onColorSelection(int index, int color, int darker);
     }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AppCompatDialog dialog = new AppCompatDialog(getActivity());
-        dialog.setContentView(R.layout.dialog_color_picker);
-        dialog.setTitle(R.string.colorPicker);
 
-        final TypedArray array = getActivity().getResources().obtainTypedArray(R.array.themeColors);
-
-        int length = array.length();
-        mColors = new int[length];
-        for (int i = 0; i < length; i++)
-            mColors[i] = array.getColor(i, 0);
-        array.recycle();
-        final GridLayout list = (GridLayout)dialog.findViewById(R.id.grid);
-        final int preselect = getArguments().getInt("preselect", -1);
-        for (int i = 0; i < list.getChildCount(); i++) {
-            FrameLayout child = (FrameLayout) list.getChildAt(i);
-            child.setTag(i);
-            child.setOnClickListener(this);
-            child.getChildAt(0).setVisibility(preselect == i ? View.VISIBLE : View.GONE);
-
-            Drawable selector = Selector.createOvalShapeSelector(mColors[i]);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                int[][] states = new int[][] {
-                        new int[]{-android.R.attr.state_pressed},
-                        new int[]{android.R.attr.state_pressed}
-                };
-                int[] colors = new int[] {
-                        Selector.shiftColor(mColors[i]),
-                        mColors[i]
-                };
-                ColorStateList rippleColors = new ColorStateList(states, colors);
-                setBackgroundCompat(child, new RippleDrawable(rippleColors, selector, null));
-            } else {
-                setBackgroundCompat(child, selector);
-            }
-        }
-        return dialog;
-    }
 
     @Override
     public void onClick(View v) {

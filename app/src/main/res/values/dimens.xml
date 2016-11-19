@@ -11,4 +11,11 @@
     <dimen name="progressbar_height">20dp</dimen>
     <dimen name="app_bar_height">240dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="section_padding">7dp</dimen>
+    <dimen name="section_text_size">20sp</dimen>
+    <dimen name="item_height">100dp</dimen>
+    <dimen name="item_margin">3dp</dimen>
+
+    <dimen name="section_text_padding_left">15dp</dimen>
 </resources>

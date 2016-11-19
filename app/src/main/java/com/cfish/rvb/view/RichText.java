@@ -1,121 +1,76 @@
 package com.cfish.rvb.view;
 
-/**
- * Created by GKX100217 on 2016/3/2.
- */
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cfish.rvb.R;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.drawable.ScalingUtils;
-import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.DraweeHolder;
-import com.facebook.drawee.view.MultiDraweeHolder;
-import com.facebook.imagepipeline.image.ImageInfo;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
-import android.text.style.QuoteSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-public class RichText extends TextView {
-    private Drawable placeHolder;
-    private OnImageClickListener onImageClickListener;
-    MultiDraweeHolder<GenericDraweeHierarchy> mMultiDraweeHolder;
-    private int d_w = 20;
-    private int d_h = 20;
 
-    public RichText(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        // TODO Auto-generated constructor stub
-        init(context,attrs);
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by dfish on 2016/11/18.
+ */
+public class RichText extends TextView implements Drawable.Callback , View.OnAttachStateChangeListener{
+
+    private OnRichTextImageClickListener onRichTextImageClickListener;//图片点击回调
+    private GlideImageGeter glideImageGeter;
+
+    public RichText(Context context) {
+        this(context, null);
     }
 
     public RichText(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        init(context, attrs);
     }
 
-    public RichText(Context context) {
-        this(context, null);
-        init(context, null);
+    public RichText(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+
     }
 
-    private void init(Context context,AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RichText);
-        placeHolder = typedArray.getDrawable(R.styleable.RichText_placeHolder);
-
-        d_w = typedArray.getDimensionPixelSize(R.styleable.RichText_default_width,d_w);
-        d_h = typedArray.getDimensionPixelSize(R.styleable.RichText_default_height, d_h);
-        if(placeHolder == null) {
-            placeHolder = new ColorDrawable(Color.GRAY);
-        }
-        placeHolder.setBounds(0, 0, d_w, d_h);
-        typedArray.recycle();
-        initDraweeHolder();
-    }
-
-    private void initDraweeHolder() {
-        mMultiDraweeHolder = new MultiDraweeHolder<GenericDraweeHierarchy>();
-    }
-
-    /*
+    /**
      * 设置富文本
-     * @param text 富文本内容
+     *
+     * @param text 富文本
      */
     public void setRichText(String text) {
-        Spanned spanned = Html.fromHtml(text,asyncImageGetter,null);
+        glideImageGeter=new GlideImageGeter(getContext(), this);
+        Spanned spanned = Html.fromHtml(text,glideImageGeter, null);
         SpannableStringBuilder spannableStringBuilder;
-        if(spanned instanceof SpannableStringBuilder) {
-            spannableStringBuilder = (SpannableStringBuilder)spanned;
-        }else {
+        if (spanned instanceof SpannableStringBuilder) {
+            spannableStringBuilder = (SpannableStringBuilder) spanned;
+        } else {
             spannableStringBuilder = new SpannableStringBuilder(spanned);
         }
+        // 处理图片得点击事件
         ImageSpan[] imageSpans = spannableStringBuilder.getSpans(0, spannableStringBuilder.length(), ImageSpan.class);
-        final List<String> imageUrls = new ArrayList<String>();
-
-        for(int i =0 ,size = imageSpans.length;i < size ;i++) {
+        final List<String> imageUrls = new ArrayList<>();
+        for (int i = 0, size = imageSpans.length; i < size; i++) {
             ImageSpan imageSpan = imageSpans[i];
             String imageUrl = imageSpan.getSource();
             int start = spannableStringBuilder.getSpanStart(imageSpan);
             int end = spannableStringBuilder.getSpanEnd(imageSpan);
             imageUrls.add(imageUrl);
-
-            final int finall = i;
-            ClickableSpan clickableSpan = new ClickableSpan(){
-
+            final int finalI = i;
+            ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    // TODO Auto-generated method stub
-                    if(onImageClickListener != null) {
-                        onImageClickListener.imageClicked(imageUrls, finall);
+                    if (onRichTextImageClickListener != null) {
+                        onRichTextImageClickListener.imageClicked(imageUrls, finalI);
                     }
                 }
-
             };
-
-            ClickableSpan[] clickableSpans = spannableStringBuilder.getSpans(start,end, ClickableSpan.class);
+            ClickableSpan[] clickableSpans = spannableStringBuilder.getSpans(start, end, ClickableSpan.class);
             if (clickableSpans != null && clickableSpans.length != 0) {
                 for (ClickableSpan cs : clickableSpans) {
                     spannableStringBuilder.removeSpan(cs);
@@ -123,188 +78,44 @@ public class RichText extends TextView {
             }
             spannableStringBuilder.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        Log.d("RichText","call settext"+spannableStringBuilder.toString());
-        super.setText(replaceQuoteSpans(spannableStringBuilder));
+        super.setText(spanned);
         setMovementMethod(LinkMovementMethod.getInstance());
     }
-
-    /**
-     * 处理<quoteblock>标签
-     */
-    private SpannableStringBuilder replaceQuoteSpans(SpannableStringBuilder spannable) {
-        QuoteSpan[] quoteSpans = spannable.getSpans(0, spannable.length(), QuoteSpan.class);
-        for (QuoteSpan quoteSpan : quoteSpans) {
-            int start = spannable.getSpanStart(quoteSpan);
-            int end = spannable.getSpanEnd(quoteSpan);
-            int flags = spannable.getSpanFlags(quoteSpan);
-            spannable.removeSpan(quoteSpan);
-            spannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.truebuy)),
-                    start,
-                    end,
-                    flags);
-        }
-        return spannable;
+    public void setOnRichTextImageClickListener(OnRichTextImageClickListener onRichTextImageClickListener) {
+        this.onRichTextImageClickListener = onRichTextImageClickListener;
     }
-
-    /*
-     * 异步加载图片，依赖fresco
-     */
-    private Html.ImageGetter asyncImageGetter = new Html.ImageGetter() {
-
-        @Override
-        public Drawable getDrawable(String source) {
-            // TODO Auto-generated method stub
-            if (!source.contains("http://")){
-                source= "http://bbs.nankai.edu.cn/"+source;
-            }
-            Log.i("RichText","asyncImageGetter getDrawable:source:"+source);
-            final URLDrawable urlDrawable = new URLDrawable();
-            GenericDraweeHierarchy mHierarchy =  new GenericDraweeHierarchyBuilder(getResources())
-                    .setActualImageScaleType(ScalingUtils.ScaleType.FIT_START)
-                    .build();
-            final DraweeHolder draweeHolder = new DraweeHolder<GenericDraweeHierarchy>(mHierarchy);
-            mMultiDraweeHolder.add(draweeHolder);
-            DraweeController controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(Uri.parse(source))
-                    .setAutoPlayAnimations(true) //动图加载完自动播放
-                    .setOldController(draweeHolder.getController())
-                    .setControllerListener(new ControllerListener<ImageInfo>() {
-                        @Override
-                        public void onSubmit(String id, Object callerContext) {
-                            urlDrawable.setBounds(placeHolder.getBounds());
-                            urlDrawable.setDrawable(placeHolder);
-                            RichText.this.setText(getText());
-                        }
-
-                        @Override
-                        public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
-                            final Drawable drawable = draweeHolder.getHierarchy().getTopLevelDrawable();
-
-                            if (imageInfo.getWidth()>600){
-                                drawable.setBounds(0, 0, 600, imageInfo.getHeight()*600/imageInfo.getWidth());
-                                urlDrawable.setBounds(20, 0, 600, imageInfo.getHeight()*600/imageInfo.getWidth());
-                            } else {
-                                drawable.setBounds(20, 0, imageInfo.getWidth(), imageInfo.getHeight());
-                                urlDrawable.setBounds(20, 0, imageInfo.getWidth(), imageInfo.getHeight());
-                            }
-
-                            urlDrawable.setDrawable(drawable);
-                            if (animatable !=null){
-                                animatable.start();
-                            }
-
-//            				listDrawable.addLevel(1,1, new BitmapDrawable(context.getResources(),result));
-//            				listDrawable.setBounds(20, 0,600, result.getHeight()*600/result.getWidth());
-//            				listDrawable.setLevel(1);
-
-
-                            RichText.this.setText(getText());
-                            Log.i("RichText", "onFinalImageSet width:" + imageInfo.getWidth() + ",height:" + imageInfo.getHeight());
-                        }
-
-                        @Override
-                        public void onIntermediateImageSet(String id, ImageInfo imageInfo) {
-                            Log.i("RichText", "onIntermediateImageSet width:" + imageInfo.getWidth() + ",height:" + imageInfo.getHeight());
-                        }
-
-                        @Override
-                        public void onIntermediateImageFailed(String id, Throwable throwable) {
-                        }
-
-                        @Override
-                        public void onFailure(String id, Throwable throwable) {
-                            urlDrawable.setBounds(placeHolder.getBounds());
-                            urlDrawable.setDrawable(placeHolder);
-                            RichText.this.setText(getText());
-                        }
-
-                        @Override
-                        public void onRelease(String id) {
-
-                        }
-                    }).build();
-            draweeHolder.setController(controller);
-
-            return urlDrawable;
-        }
-    };
-
-    @Override
-    protected boolean verifyDrawable(Drawable who) {
-        if (who instanceof URLDrawable && mMultiDraweeHolder.verifyDrawable(((URLDrawable) who).getDrawable())) {
-            return true;
-        }
-        // 对其他Drawable的验证逻辑
-        return super.verifyDrawable(who);
-    }
-
-    private static final class URLDrawable extends BitmapDrawable {
-        private Drawable drawable;
-
-        @SuppressWarnings("deprecation")
-        public URLDrawable() {
-        }
-
-        @Override
-        public void draw(Canvas canvas) {
-            if (drawable != null)
-                drawable.draw(canvas);
-        }
-
-        public void setDrawable(Drawable drawable) {
-            this.drawable = drawable;
-        }
-
-        public Drawable getDrawable() {
-            return drawable;
-        }
-    }
-
-    public void setPlaceHolder(Drawable placeHolder) {
-        this.placeHolder = placeHolder;
-        this.placeHolder.setBounds(0, 0, d_w, d_h);
-    }
-
-    public void setErrorImage(Drawable errorImage) {
-        this.placeHolder = errorImage;
-        this.placeHolder.setBounds(0, 0, d_w, d_h);
-    }
-
-    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
-        this.onImageClickListener = onImageClickListener;
-    }
-
-    public interface OnImageClickListener {
-        /*
-         * 图片被点击的回调方法
-         * @param imageUrls 富文本中的全部图片
-         * @param position 被点击的图片处于imageUrls中的位置
+    public interface OnRichTextImageClickListener {
+        /**
+         * 图片被点击后的回调方法
+         *
+         * @param imageUrls 本篇富文本内容里的全部图片
+         * @param position  点击处图片在imageUrls中的位置
          */
-        void imageClicked(List<String>imageUrls,int position);
+        void imageClicked(List<String> imageUrls, int position);
+    }
+    @Override
+    public void onViewAttachedToWindow(View v) {
+
+    }
+    @Override
+    public void onViewDetachedFromWindow(View v) {
+        glideImageGeter.recycle();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    public void invalidateDrawable(Drawable who) {
+
+        invalidateOutline(); ///新的
+
     }
 
     @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mMultiDraweeHolder.onDetach();
+    public void scheduleDrawable(Drawable who, Runnable what, long when) {
     }
 
     @Override
-    public void onStartTemporaryDetach() {
-        super.onStartTemporaryDetach();
-        mMultiDraweeHolder.onDetach();
+    public void unscheduleDrawable(Drawable who, Runnable what) {
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        mMultiDraweeHolder.onAttach();
-    }
-
-    @Override
-    public void onFinishTemporaryDetach() {
-        super.onFinishTemporaryDetach();
-        mMultiDraweeHolder.onAttach();
-    }
 }
-

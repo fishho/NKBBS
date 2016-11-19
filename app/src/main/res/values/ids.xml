@@ -4,4 +4,5 @@
     <item type="id" name="user"></item>
     <item type="id" name="article"></item>
     <item type="id" name="simple_title"></item>
+    <item type="id" name="img_tag"></item>
 </resources>

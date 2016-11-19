@@ -89,7 +89,7 @@ public class GroupFragment extends Fragment {
         // Inflate the layout for this fragment
         //initData();
         groupRv = (RecyclerView)view.findViewById(R.id.group_rv);
-        groupRv.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        groupRv.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         return view;
     }
 
@@ -104,7 +104,7 @@ public class GroupFragment extends Fragment {
         params.add("uid",uid);
         //params.add("type","group_num");
         //params.add("type","all_group_names");
-        params.add("type","active_groups");
+        params.add("type","group_names");
 //        HttpUtil.post(CommonData.groupURL,params,new JsonHttpResponseHandler(){
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -143,8 +143,8 @@ public class GroupFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
-            //initData();
-            jsoupHot();
+            initData();
+            //jsoupHot();
 
         } else {
             Log.d("Dfish","GroupFragment is not visible");

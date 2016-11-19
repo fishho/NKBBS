@@ -182,7 +182,7 @@ public class TopFragment extends Fragment {
                     @Override
                     public void onItemClick(View v, String data, int flag) {
                         //Snackbar.make(view, data, Snackbar.LENGTH_SHORT).show();
-                        String[] s = data.split("`", 2);
+                        String[] s = data.split("`");
                         Intent intent = new Intent();
                         Bundle localBundle = new Bundle();
                         switch (flag) {
@@ -202,6 +202,7 @@ public class TopFragment extends Fragment {
                                 intent.setClass(getActivity(), ArticleActivity.class);
                                 localBundle.putString("g_a_id", s[0]);
                                 localBundle.putString("title", s[1]);
+                                localBundle.putString("g_id",s[2]);
                                 break;
                             default:
                                 break;

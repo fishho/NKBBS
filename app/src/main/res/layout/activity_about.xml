@@ -32,7 +32,7 @@
                 android:id="@+id/version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.1.0"
+                android:text="1.2.0"
                 android:layout_gravity="center_horizontal|bottom"
                 app:layout_collapseMode="parallax"
                 />
@@ -51,17 +51,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
                 android:textSize="24sp"
                 android:textColor="@color/primary"
-                android:text="BBS"/>
+                android:text="我爱南开BBS手机版"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/primary">
+            </View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Author:Dfish"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
+                android:text="作者:我爱南开BBS技术组"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/primary">
+            </View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description:balabala"/>
+                android:layout_marginTop="12dp"
+                android:text="欢迎各位站友参与到BBS的建设中来\n欢迎各种建议和设计稿"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

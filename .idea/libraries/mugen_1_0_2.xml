@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mugen-1.0.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.vinaysshenoy/mugen/1.0.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.vinaysshenoy/mugen/1.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vinaysshenoy/mugen/1.0.2/955ca2c9fe325a43dbe23cc63c7351218c646cb6/mugen-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

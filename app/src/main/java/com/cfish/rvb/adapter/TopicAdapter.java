@@ -63,6 +63,8 @@ public class TopicAdapter extends Adapter<ViewHolder> implements View.OnClickLis
 		if (mTopic.getTop().equals("1")){
 			Log.d("Dfish","TopicAdapter ,is top ,set title to the gold color");
 			itemholder.title.setTextColor(mContext.getResources().getColor(R.color.golden));
+		} else {
+			itemholder.title.setTextColor(mContext.getResources().getColor(R.color.black));
 		}
 		itemholder.reply.setText(mTopic.getReply_num());
         itemholder.click.setText(mTopic.getClick_num());

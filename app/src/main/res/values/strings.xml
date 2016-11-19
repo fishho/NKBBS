@@ -17,7 +17,7 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">请输入用户名</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -64,6 +64,7 @@
     <string name="about">关于</string>
     <string name="myself">关于自己</string>
     <string name="colorPicker">颜色选择</string>
+    <string name="addComment">说两句</string>
     <!--<string name="actionConcern">关注了：</string>-->
     <!--<string name="concernSite">关注了主题站：</string>-->
     <!--<string name="atSite">在主题站：</string>-->

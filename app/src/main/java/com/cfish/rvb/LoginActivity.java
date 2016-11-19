@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    Button mEmailSignInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUidView = (AutoCompleteTextView) findViewById(R.id.uid);
-
+        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
             focusView = mUidView;
             cancel = true;
         }
-        saveSharedPreferences(true,true);
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -160,24 +160,40 @@ public class LoginActivity extends AppCompatActivity {
                     super.onSuccess(statusCode, headers, response);
                     Log.d("Dfish", response.toString());
                     try {
-                        JSONObject info = response.getJSONObject("data");
-                        Intent data = new Intent();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",info.getString("name"));
-                        bundle.putString("avatar", info.getString("big_avatar"));
-                        bundle.putString("score", info.getString("score"));
-                        bundle.putString("signature",info.getString("signature"));
-                        CommonData.user.setUid(info.getString("uid"));
-                        CommonData.user.setReply_order(info.getString("reply_order"));
-                        data.putExtras(bundle);
-                        setResult(RESULT_OK, data);
-                        showProgress(false);
+                        String status = response.getString("status");
+                        if (status.equals("0")) {
+                            showProgress(false);
+                            Snackbar.make(mEmailSignInButton,response.getString("error"),Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            JSONObject info = response.getJSONObject("data");
+                            Intent data = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",info.getString("name"));
+                            bundle.putString("avatar", info.getString("big_avatar"));
+                            bundle.putString("score", info.getString("score"));
+                            bundle.putString("signature",info.getString("signature"));
+                            CommonData.user.setUid(info.getString("uid"));
+                            CommonData.user.setReply_order(info.getString("reply_order"));
+                            CommonData.user.setName(info.getString("name"));
+                            CommonData.user.setBig_avatar(info.getString("big_avatar"));
+                            CommonData.user.setScore(info.getString("score"));
+                            CommonData.user.setRank(info.getString("rank"));
+                            CommonData.user.setSignature(info.getString("signature"));
 
-                        Intent intent = new Intent();
-                        intent.setClass(LoginActivity.this,MainActivity.class);
-                        LoginActivity.this.startActivity(intent);
+                            saveSharedPreferences(true,true);
 
-                        LoginActivity.this.finish();
+
+                            data.putExtras(bundle);
+                            setResult(RESULT_OK, data);
+                            showProgress(false);
+
+                            Intent intent = new Intent();
+                            intent.setClass(LoginActivity.this,MainActivity.class);
+                            LoginActivity.this.startActivity(intent);
+
+                            LoginActivity.this.finish();
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

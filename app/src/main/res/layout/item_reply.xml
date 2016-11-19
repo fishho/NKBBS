@@ -68,10 +68,6 @@
         android:layout_marginRight="5dp"
         android:layout_below="@id/rep_content"
         android:layout_alignParentRight="true"/>
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray">
-    </view>
+
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cfish.rvb.R;
 import com.cfish.rvb.bean.Article;
 import com.cfish.rvb.bean.Author;
@@ -128,7 +129,6 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
                 }
 
 
-
                 itemHolder.actQuote.setTag(reply.getG_r_id()+"`"+itemHolder.replyContent.getText());
             }
         } else if (holder instanceof HeaderHolder) {
@@ -206,10 +206,14 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
                     onItemClickListener.onItemClick(v,"`",4);
                     break;
                 case R.id.act_rep:
-                default:
                     if (v.getTag() != null) {
                         onItemClickListener.onItemClick(v, v.getTag().toString(), 5);
                     }
+                    break;
+                default:
+//                    if (v.getTag() != null) {
+//                        onItemClickListener.onItemClick(v, v.getTag().toString(), 5);
+//                    }
                     break;
             }
         }
@@ -233,6 +237,7 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
             actQuote =(TextView)itemView.findViewById(R.id.act_quote);
             replyer = (TextView)itemView.findViewById(R.id.replyer);
             replyContent = (RichText)itemView.findViewById(R.id.rep_content);
+            replyContent.setRichText("");
             replyTime = (TextView)itemView.findViewById(R.id.rep_time);
             toRepley = (TextView)itemView.findViewById(R.id.toreplyer);
         }

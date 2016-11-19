@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
     </style>
-    <style name="PearTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="PearTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/pearPrimary</item>
         <item name="colorPrimaryDark">@color/eyeDark</item>
         <item name="colorAccent">@color/pearAccent</item>

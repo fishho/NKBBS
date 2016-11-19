@@ -8,21 +8,21 @@
             android:title="活跃" />
         <item android:id="@+id/nv_group" android:icon="@mipmap/ic_apps"
             android:title="小组" />
-        <item android:id="@+id/nv_friends" android:icon="@mipmap/ic_account_multiple"
-            android:title="动态" />
+        <!--<item android:id="@+id/nv_friends" android:icon="@mipmap/ic_account_multiple"-->
+            <!--android:title="动态" />-->
         <item android:id="@+id/nv_person" android:icon="@mipmap/ic_account"
             android:title="收藏" />
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item android:id="@+id/nv_setting" android:icon="@mipmap/ic_cog"
-                android:title="设置" />
+            <!--<item android:id="@+id/nv_setting" android:icon="@mipmap/ic_cog"-->
+                <!--android:title="设置" />-->
             <item android:id="@+id/nv_about" android:icon="@mipmap/ic_information"
                 android:title="关于" />
-            <item android:title="夜间模式" android:actionLayout="@layout/item_topic">
-            </item>
-            <item android:id="@+id/nv_theme" android:title="主题" android:onClick="changeTheme"/>
+<!--            <item android:title="夜间模式" android:actionLayout="@layout/item_topic">
+            </item>-->
+            <!--<item android:id="@+id/nv_theme" android:title="主题" android:onClick="changeTheme"/>-->
             <item android:id="@+id/nv_logout" android:icon="@mipmap/ic_power"
                 android:title="退出登录" />
 

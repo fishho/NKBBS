@@ -145,6 +145,8 @@ public class SplashActivity extends AppCompatActivity {
                         CommonData.user.setScore(info.getString("score"));
                         CommonData.user.setUid(info.getString("uid"));
                         CommonData.user.setReply_order(info.getString("reply_order"));
+                        CommonData.user.setRank(info.getString("rank"));
+                        CommonData.user.setSignature(info.getString("signature"));
 
 
                     } catch (JSONException e) {

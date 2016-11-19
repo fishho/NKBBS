@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -47,8 +48,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
+import me.shaohui.bottomdialog.BottomDialog;
 
 public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
     private String g_a_id,formatImg,uid;
@@ -57,10 +60,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     private HeaderAdapter hAdapter;
     private EditText myReply;
     private ImageButton picture;
-    private ImageButton post;
+    private TextView post,commentCount;
     private ImageButton noName;
     private ProgressBar progressBar,uploadProgress;
-    private LinearLayout bottom;
+    private LinearLayout bottom,hidedd;
     private String p_g_r_id = "";
     private String g_id = "";
     private String isNoName = "0"; //是否匿名评论
@@ -91,29 +94,32 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         this.g_id = getIntent().getExtras().getString("g_id");
         Log.d("Dfish","g_id from intent"+g_id);
         picture = (ImageButton)findViewById(R.id.picture);
-        myReply = (EditText)findViewById(R.id.content);
-        post = (ImageButton)findViewById(R.id.post);
+        myReply = (EditText)findViewById(R.id.edit_text11);
+        post = (TextView)findViewById(R.id.post);
+        commentCount = (TextView)findViewById(R.id.comment_count);
         noName = (ImageButton)findViewById(R.id.noname);
         bottom = (LinearLayout)findViewById(R.id.bottom);
+        hidedd = (LinearLayout)findViewById(R.id.hidedd) ;
         picture.setOnClickListener(this);
         post.setOnClickListener(this);
         noName.setOnClickListener(this);
+        bottom.setOnClickListener(this);
 
-        myReply.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-//                    myReply.setVisibility(View.GONE);
+//        myReply.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+////                    myReply.setVisibility(View.GONE);
+////
+////                    View popView = LayoutInflater.from(ArticleActivity.this).inflate(R.layout.popup_window, null);
+////                    PopupWindow popupWindow = new PopupWindow(popView, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
+////                            LinearLayoutCompat.LayoutParams.WRAP_CONTENT,true);
+////                    popupWindow.showAsDropDown(myReply,dip2px(ArticleActivity.this,60),-dip2px(ArticleActivity.this,60));
+////                    popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.nk));
 //
-//                    View popView = LayoutInflater.from(ArticleActivity.this).inflate(R.layout.popup_window, null);
-//                    PopupWindow popupWindow = new PopupWindow(popView, LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
-//                            LinearLayoutCompat.LayoutParams.WRAP_CONTENT,true);
-//                    popupWindow.showAsDropDown(myReply,dip2px(ArticleActivity.this,60),-dip2px(ArticleActivity.this,60));
-//                    popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.nk));
-
-                }
-            }
-        });
+//                }
+//            }
+//        });
         getData();
         if(g_id != null) {
             isCanAnonymous(g_id);
@@ -151,6 +157,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 //Snackbar.make(v,"提交",Snackbar.LENGTH_SHORT).show();
                 //get edittext content and post to the sever
                 //if successed,refresh the view;
+
+
+
+
                 String articleId = myReply.getText().toString();
                 if (isNumeric(articleId)){
                     Intent intentArticle = new Intent();
@@ -161,7 +171,24 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 }else {
                     postReply();
                 }
+
+//                BottomDialog.create(getSupportFragmentManager())
+//                        .setViewListener(new BottomDialog.ViewListener() {
+//                            @Override
+//                            public void bindView(View v) {
+//                                //initView(v);
+//                            }
+//                        })
+//                        .setLayoutRes(R.layout.dialog_edit_text)
+//                        .setDimAmount(0.1f)
+//                        .setTag("BottomDialog")
+//                        .show();
+
                 break;
+            case R.id.bottom :
+                showReplyBox();
+                break;
+
             default:
                 break;
         }
@@ -184,6 +211,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void showReplyBox() {
+        bottom.setVisibility(View.GONE);
+        hidedd.setVisibility(View.VISIBLE);
+        myReply.requestFocus();
+        InputMethodManager imm = (InputMethodManager) myReply.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+    }
+
+    private void hideReplyBox() {
+        bottom.setVisibility(View.VISIBLE);
+        hidedd.setVisibility(View.GONE);
+    }
     private void getData() {
         params =  new RequestParams();
         uid=  (CommonData.user.getUid()== null)? "-1":CommonData.user.getUid() ;
@@ -236,6 +275,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 
                     List<Reply> replyList = details.getReply();
                     Author author = details.getAuthor();
+                    commentCount.setText(replyList.size()+"回复");
                     //List<Reply> replyList = JsonParse.parseReplys(resp);
                     Log.d("Dfish", "replist isempty?" + replyList.isEmpty() + " " + (replyList == null));
                     //Log.d("Dfish", "tag == null?" + (tagList == null));
@@ -270,6 +310,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                                 case 1:
                                     p_g_r_id = s[0];
                                     Log.d("Dfish", "p_g_r_id" + p_g_r_id);
+                                    showReplyBox();
                                     myReply.setText("");
                                     myReply.append("<blockquote>" + s[1].trim() + "</blockquote>");
                                     break;
@@ -284,14 +325,17 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                                 case 4:
                                     p_g_r_id = "";
                                     Log.d("Dfish", "p_g_r_id" + p_g_r_id);
-                                    myReply.setText("");
+                                    showReplyBox();
+                                    myReply.setHint("回复");
                                     break;
                                 case 5:
                                     p_g_r_id = s[0];
                                     Log.d("Dfish", "p_g_r_id" + p_g_r_id);
+                                    showReplyBox();
                                     myReply.clearComposingText();
-                                    myReply.setText("");
-                                    myReply.append("回复 " + s[1] + ": ");
+                                    //myReply.setText("");
+                                    //myReply.append();
+                                    myReply.setHint("回复 " + s[1] + ": ");
                                     break;
                                 default:
                                     break;
@@ -423,6 +467,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                         imm.hideSoftInputFromWindow(myReply.getWindowToken(), 0);
 
                         hAdapter.refreshData(replyList);
+                        hideReplyBox();
+                        commentCount.setText(replyList.size()+"回复");
                     }
                 });
 
@@ -532,6 +578,18 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 //    }
 
 
+    @Override
+    public void onBackPressed() {
+        Log.d("myReplgetVisibility() ",myReply.getVisibility()+"");
+        if(hidedd.getVisibility() == View.VISIBLE){
+
+            hideReplyBox();
+        } else {
+            super.onBackPressed();
+        }
+
+
+    }
 
     @Override
     protected void onResume() {

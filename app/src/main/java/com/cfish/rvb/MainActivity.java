@@ -41,7 +41,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ColorPickerDialog.Callback {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private TabLayout main_tabs;
     private ViewPager main_pager;
     private View view;
@@ -216,18 +216,21 @@ public class MainActivity extends AppCompatActivity
             startActivity(activeIntent);
 
         } else if (id == R.id.nv_group) {
+            Intent activeIntent = new Intent();
+            activeIntent.setClass(this,GroupListActivity.class);
+            startActivity(activeIntent);
 
         } else if (id == R.id.nv_person) {
             //收藏页面
             Intent personIntent = new Intent();
             personIntent.setClass(this,FavActivity.class);
             startActivity(personIntent);
-        } else if (id == R.id.nv_setting) {
+        }/* else if (id == R.id.nv_setting) {
             //设置页面
             Intent settingIntent = new Intent();
             settingIntent.setClass(this,SettingsActivity.class);
             startActivity(settingIntent);
-        } else if (id == R.id.nv_about) {
+        }*/ else if (id == R.id.nv_about) {
             //关于
             Intent msgIntent = new Intent();
             msgIntent.setClass(this,AboutActivity.class);
@@ -287,17 +290,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void changeTheme() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("curTheme",0);
-        new ColorPickerDialog().show(this, sharedPreferences.getInt("color",1));
-    }
 
-    @Override
-    public void onColorSelection(int index, int color, int darker) {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("curTheme",0);
-        sharedPreferences.edit().putInt("color",index).commit();
-        recreate();
-    }
+
 
     public class MsgReceiver extends BroadcastReceiver {
         @Override
