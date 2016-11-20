@@ -31,6 +31,7 @@ import com.cfish.rvb.bean.Details;
 import com.cfish.rvb.bean.Reply;
 import com.cfish.rvb.util.CommonData;
 import com.cfish.rvb.util.HttpUtil;
+import com.cfish.rvb.util.ImageUtil;
 import com.cfish.rvb.util.JsonParse;
 import com.cfish.rvb.util.Uri2Path;
 import com.loopj.android.http.AsyncHttpClient;
@@ -204,7 +205,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         if (requestCode ==2 && data != null) {
             String uri = Uri2Path.parse(this,data.getData());
             Log.i("Dfish", "uri :" + uri);
-            File file = new File(uri);
+            File file = ImageUtil.imageCompress(this,uri);
             String name = uri.substring(uri.lastIndexOf("/")+1,uri.length());
             Log.i("Dfish","pic name :"+name);
             upImage(file,name);
@@ -275,7 +276,9 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 
                     List<Reply> replyList = details.getReply();
                     Author author = details.getAuthor();
-                    commentCount.setText(replyList.size()+"回复");
+                    if (replyList.get(0).getCreatime() != null) {
+                        commentCount.setText(replyList.size() + "回复");
+                    }
                     //List<Reply> replyList = JsonParse.parseReplys(resp);
                     Log.d("Dfish", "replist isempty?" + replyList.isEmpty() + " " + (replyList == null));
                     //Log.d("Dfish", "tag == null?" + (tagList == null));

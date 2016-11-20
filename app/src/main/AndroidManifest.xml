@@ -75,6 +75,7 @@
             android:label="@string/about"/>
         <activity android:name=".ProfileActivity"
             android:label="@string/myself" />
+        <activity android:name=".GroupListActivity" />
     </application>
 
 </manifest>

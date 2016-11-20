@@ -34,11 +34,6 @@
         android:clickable="true"
         android:orientation="horizontal"
         android:background="@color/primary">
-        <ProgressBar
-            android:id="@+id/upload_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
         <TextView
             android:id="@+id/add_comment"
             android:layout_width="0dp"
@@ -98,6 +93,11 @@
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 >
+                <ProgressBar
+                    android:id="@+id/upload_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
                 <ImageButton
                     android:id="@+id/picture"
                     android:layout_width="0dp"
