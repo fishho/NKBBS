@@ -62,7 +62,7 @@ public class SectionedExpandableGridAdapter extends RecyclerView.Adapter<Section
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         switch (holder.viewType) {
             case VIEW_TYPE_ITEM :
                 final Item item = (Item) mDataArrayList.get(position);
@@ -87,6 +87,7 @@ public class SectionedExpandableGridAdapter extends RecyclerView.Adapter<Section
                 holder.sectionToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        holder.sectionToggleButton.setChecked(isChecked);
                         mSectionStateChangeListener.onSectionStateChanged(section, isChecked);
                     }
                 });

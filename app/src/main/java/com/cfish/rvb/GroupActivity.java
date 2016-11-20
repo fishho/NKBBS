@@ -55,13 +55,16 @@ public class GroupActivity extends AppCompatActivity {
     private BaseAttacher baseAttacher;
     private View view;
     private Context context;
+    String concern = "0";
+    private String groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         this.gid = getIntent().getExtras().getString("gid");
-        setTitle(getIntent().getExtras().getString("title"));
+        this.groupName = getIntent().getExtras().getString("title");
+        setTitle(groupName);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,11 +82,17 @@ public class GroupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("gid", gid);
-                intent.putExtra("canAnonymous",canAnonymous);
+                intent.putExtra("groupName", groupName);
+                intent.putExtra("canAnonymous", canAnonymous);
                 intent.setClass(GroupActivity.this, PostActivity.class);
                 //GroupActivity.this.startActivity(intent); //idea:for result and refresh?
                 //idea impl
-                startActivityForResult(intent,2);
+                if (concern.equals("1"))
+                {
+                    startActivityForResult(intent,2);
+                } else {
+                    Snackbar.make(fab,"请先关注小组", Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -179,12 +188,15 @@ public class GroupActivity extends AppCompatActivity {
                 }
                 JSONObject resp = JSON.parseObject(responseString);
                 List<Topic> topics = JsonParse.parseGroupArticles(resp);
-                String concern = resp.getJSONObject("data").getString("concern");
+                concern = resp.getJSONObject("data").getString("concern");
                 canAnonymous = resp.getJSONObject("data").getJSONObject("group").getString("anonymous");
                 Log.d("Dfish",canAnonymous);
                 if (concern.equals("1")) {
-                    fab.setVisibility(View.VISIBLE);
+                    fab.show();
                     flagConcern = true;
+                }else {
+                    fab.hide();
+                    flagConcern =false;
                 }
                 for (Topic topic : topics) {
                     topicList.add(topic);
@@ -241,7 +253,20 @@ public class GroupActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem message= menu.findItem(R.id.action_concern);
+        if (concern.equals("1")){
+            message.setIcon(R.mipmap.ic_heart);
+            Log.d("aaaa","visible");
+        } else {
+            message.setIcon(R.mipmap.ic_heart_outline);
+            Log.d("aaaa","invisible");
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
@@ -274,8 +299,10 @@ public class GroupActivity extends AppCompatActivity {
                         Snackbar.make(toolbar,snackText,Snackbar.LENGTH_SHORT).show();
                         if(flagConcern) {
                             fab.show();
+                            item.setIcon(R.mipmap.ic_heart);
                         } else {
                             fab.hide();
+                            item.setIcon(R.mipmap.ic_heart_outline);
                         }
                     }
                 });

@@ -1,7 +1,10 @@
 package com.cfish.rvb.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -64,6 +67,7 @@ public class TopicFragment extends Fragment {
     private SwipeRefreshLayout swipeRefresh;
     private BaseAttacher baseAttacher;
     private View view;
+    private RefreshBroadcast refreshB;
 
     /**
      * Use this factory method to create a new instance of
@@ -94,6 +98,10 @@ public class TopicFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("refresh");
+        refreshB = new RefreshBroadcast();
+        getActivity().registerReceiver(refreshB, intentFilter);
     }
 
     @Override
@@ -243,4 +251,22 @@ public class TopicFragment extends Fragment {
 //            Log.d("Dfish","TopicFragment is not visible");
 //        }
 //    }
+
+
+    @Override
+    public void onDestroy() {
+        getActivity().unregisterReceiver(refreshB);
+        super.onDestroy();
+    }
+
+    private class RefreshBroadcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("refresh")){
+                getData(1);
+            }
+        }
+    }
+
+
 }

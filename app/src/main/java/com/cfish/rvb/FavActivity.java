@@ -35,6 +35,7 @@ public class FavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav);
+        setTitle("收藏");
         simpleTopics = (RecyclerView)findViewById(R.id.simple_topics);
         getData(1);
 

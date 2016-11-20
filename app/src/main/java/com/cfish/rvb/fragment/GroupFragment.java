@@ -129,11 +129,26 @@ public class GroupFragment extends Fragment {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d("Dfish", "GroupFragment SS" + responseString);
                 List<Group> groups =JsonParse.parseGoupList(JSON.parseObject(responseString));
-                Collections.sort(groups);
+                //Collections.sort(groups);
 //                for (Group group : groups) {
 //                    Log.d("Dfish group",group.getLabel()+"1");
 //                }
                 GroupAdapter adapter = new GroupAdapter(getActivity(),groups);
+                adapter.setOnItemClickListener(new GroupAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, String data) {
+                        Log.d("ddddddd", data);
+                        String[] s=data.split("`");
+                        Intent intent = new Intent();
+                        Bundle localBundle = new Bundle();
+                        intent.setClass(getActivity(), GroupActivity.class);
+                        localBundle.putString("gid", s[0]);
+                        localBundle.putString("title",s[1]);
+                        intent.putExtras(localBundle);
+                        getActivity().startActivity(intent);
+
+                    }
+                });
                 groupRv.setAdapter(adapter);
             }
         });

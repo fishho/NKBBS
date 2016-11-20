@@ -1,5 +1,7 @@
 package com.cfish.rvb;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import android.widget.Toast;
 
 import com.cfish.rvb.adapter.ViewPagerAdapter;
 import com.cfish.rvb.bean.Message;
+import com.cfish.rvb.bean.Topic;
 import com.cfish.rvb.fragment.GroupFragment;
 import com.cfish.rvb.fragment.SiteFragment;
 import com.cfish.rvb.fragment.TopFragment;
@@ -215,6 +218,13 @@ public class MainActivity extends AppCompatActivity
             activeIntent.setClass(this,ActiveUserActivity.class);
             startActivity(activeIntent);
 
+        } else if (id == R.id.nv_post) {
+            //发帖
+            Intent postIntent = new Intent();
+            postIntent.setClass(this, PostActivity.class);
+            //startActivity(postIntent);
+            startActivityForResult(postIntent,27);
+
         } else if (id == R.id.nv_group) {
             Intent activeIntent = new Intent();
             activeIntent.setClass(this,GroupListActivity.class);
@@ -266,27 +276,46 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode) {
-            case RESULT_OK:
-                Bundle bundle = data.getExtras();
-                String name = bundle.getString("name");
-                String score = bundle.getString("score");
-                String avatarUrl = bundle.getString("avatar");
-                String signature = bundle.getString("signature");
+        if (requestCode == 27) {
+            Log.d("Main requestCode", "27");
+            if (resultCode == RESULT_OK) {
+//                TopicFragment fragment = new TopicFragment();
+//                FragmentManager fragmentManager = getFragmentManager()
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.show((Fragment)fragment);
+                //main_pager.getAdapter().notifyDataSetChanged();
+                //main_pager.getCurrentItem().
+                Intent intentb = new Intent();
+                intentb.setAction("refresh");
+                //intentb.putExtra("msg", "1");
+                sendBroadcast(intentb);
+                //main_pager.setCurrentItem(0);
+            }
+
+        } else {
+            switch (resultCode) {
+                case RESULT_OK:
+                    Bundle bundle = data.getExtras();
+                    String name = bundle.getString("name");
+                    String score = bundle.getString("score");
+                    String avatarUrl = bundle.getString("avatar");
+                    String signature = bundle.getString("signature");
 //                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //                View view = navigationView.inflateHeaderView(R.layout.nav_header_main);
-                //navigationView.removeHeaderView(view);
-                SimpleDraweeView avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
-                avatar.setImageURI(Uri.parse("http://bbs.nankai.edu.cn/data/uploads/avatar/" + avatarUrl));
-                TextView uName = (TextView) view.findViewById(R.id.uName);
-                TextView scoreText = (TextView) view.findViewById(R.id.scoreText);
-                TextView signature1 = (TextView) view.findViewById(R.id.signature);
-                uName.setText(name);
-                scoreText.setText(score);
-                signature1.setText(signature);
-                break;
-            default:
-                break;
+                    //navigationView.removeHeaderView(view);
+                    SimpleDraweeView avatar = (SimpleDraweeView) view.findViewById(R.id.avatar);
+                    avatar.setImageURI(Uri.parse("http://bbs.nankai.edu.cn/data/uploads/avatar/" + avatarUrl));
+                    TextView uName = (TextView) view.findViewById(R.id.uName);
+                    TextView scoreText = (TextView) view.findViewById(R.id.scoreText);
+                    TextView signature1 = (TextView) view.findViewById(R.id.signature);
+                    uName.setText(name);
+                    scoreText.setText(score);
+                    signature1.setText(signature);
+                    break;
+                default:
+                    break;
+        }
+
         }
     }
 

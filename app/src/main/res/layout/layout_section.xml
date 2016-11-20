@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/section_padding"
             android:paddingBottom="@dimen/section_padding"
             android:paddingStart="@dimen/section_text_padding_left"
-            android:background="@drawable/theme_color"
+            android:background="@color/primary"
             android:textColor="@android:color/white"
             android:textSize="@dimen/section_text_size"
             android:id="@+id/text_section"
