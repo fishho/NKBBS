@@ -198,6 +198,7 @@ public class GroupActivity extends AppCompatActivity {
                     fab.hide();
                     flagConcern =false;
                 }
+                invalidateOptionsMenu();
                 for (Topic topic : topics) {
                     topicList.add(topic);
                 }

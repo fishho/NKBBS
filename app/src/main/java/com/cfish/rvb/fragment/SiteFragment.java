@@ -16,6 +16,7 @@ import com.cfish.rvb.util.CommonData;
 import com.cfish.rvb.util.HttpUtil;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class SiteFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RequestParams params;
+    private RequestParams params, paramsTest;
     private NewsAdapter adapter;
     private List<Map<String,String>> newsList;
     private RecyclerView siteArticleRv;
@@ -135,6 +136,7 @@ public class SiteFragment extends Fragment {
                     for (int i=0;i<data.length();i++) {
                         map = new HashMap();
                         map.put("sid",data.getJSONObject(i).getString("sid"));
+                        map.put("s_a_id",data.getJSONObject(i).getString("s_a_id"));
                         map.put("author",data.getJSONObject(i).getString("author"));
                         map.put("creatime",data.getJSONObject(i).getString("creatime"));
                         map.put("reply",data.getJSONObject(i).getString("reply_num"));
@@ -148,6 +150,32 @@ public class SiteFragment extends Fragment {
 
 
                 adapter.refreshData(newsList);
+                adapter.setOnItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, String data) {
+                        paramsTest = new RequestParams();
+                        paramsTest.add("uid","-1");
+                        paramsTest.add("reply_order", CommonData.user.getReply_order());
+                        paramsTest.add("type", "get_site_article");
+                        paramsTest.add("s_a_id", data);
+                        Log.d(TAG, "onItemClick: "+data);
+                        HttpUtil.post(CommonData.siteURL, paramsTest, new TextHttpResponseHandler() {
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                Log.d(TAG, "onFailure: "+responseString);
+                            }
+
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                                  //  Log.d("DDDDD", responseString);
+                                if (responseString.length() > 4000){
+                                    Log.d("Dfish","Article part1"+responseString.length()+responseString.substring(0,4000));
+                                    Log.d("Dfish","Article part2"+responseString.substring(4000));
+                                }
+                            }
+                        });
+                    }
+                });
             }
 
             @Override

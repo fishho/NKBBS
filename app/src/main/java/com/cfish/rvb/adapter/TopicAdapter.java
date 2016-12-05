@@ -56,9 +56,14 @@ public class TopicAdapter extends Adapter<ViewHolder> implements View.OnClickLis
         String gid = mTopic.getGid();
 		itemholder.head.setImageURI(Uri.parse("http://bbs.nankai.edu.cn/data/uploads/cover/group/" + gid + ".jpg"));
 		Log.d("Dfish", "TopicAdapter group id is"+mTopic.getGid());
-//		String author = mTopic.getAnonymous().equals("1") ? "":mTopic.getAuthor();
-//		itemholder.author.setText(author);
-		itemholder.author.setText(mTopic.getAuthor());
+		if (mTopic.getAnonymous().equals("1")) {
+			itemholder.author.setText("");
+			itemholder.author.setClickable(false);
+		}else {
+			itemholder.author.setText(mTopic.getAuthor());
+		}
+
+		//itemholder.author.setText(mTopic.getAuthor());
 		itemholder.title.setText(mTopic.getName());
 		if (mTopic.getTop().equals("1")){
 			Log.d("Dfish","TopicAdapter ,is top ,set title to the gold color");

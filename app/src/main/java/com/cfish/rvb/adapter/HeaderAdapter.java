@@ -109,7 +109,14 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
                 itemHolder.replyer.setTag(reply.getUser_id() + "`" + reply.getUser().name);
                 itemHolder.replyContent.setTag(reply.getG_r_id() + "`" + reply.getUser().name);
                 //设置用户名，可能回复其他用户的情况出现
-                itemHolder.replyer.setText(reply.getUser().name);
+                Log.d("aaaaaaaaaaaaaa", reply.getNoname());
+                if (reply.getNoname().equals("1")) {
+                    itemHolder.replyer.setText("匿名");
+                    itemHolder.replyer.setClickable(false);
+                } else {
+                    itemHolder.replyer.setText(reply.getUser().name);
+                }
+
 
                 //有对应错乱的现象？
                 String p_g_r_id = reply.getP_g_r_id();
@@ -117,8 +124,13 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
                 if (p_g_r_id != null){
                     String theReplyer ="" ;
                     for (Reply item :replyList){
+
                        if( p_g_r_id.equals(item.getG_r_id())){
                            theReplyer = item.getUser().name;
+                           if(item.getNoname().equals("1")) {
+                               itemHolder.toRepley.setClickable(false);
+                               theReplyer= "匿名";
+                           }
                            break;
                        }
                     }
@@ -177,8 +189,14 @@ public class HeaderAdapter extends RecyclerView.Adapter implements View.OnClickL
             headerHolder.recommend.setText("赞" + header.getRecommend_num());
             headerHolder.dis.setText("踩" + header.getDeter_num());
             headerHolder.fav.setText("收藏"+header.getFav_num());
-            headerHolder.author.setText(author.name);
-            headerHolder.author.setTag(author.uid+"`"+author.name);
+            if(header.getAnonymous().equals("1")) {
+                headerHolder.author.setText("匿名");
+                headerHolder.author.setClickable(false);
+            } else {
+                headerHolder.author.setText(author.name);
+                headerHolder.author.setTag(author.uid+"`"+author.name);
+            }
+
 
         }
 

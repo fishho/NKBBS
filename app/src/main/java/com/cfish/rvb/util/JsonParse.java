@@ -12,6 +12,7 @@ import com.cfish.rvb.bean.Group;
 import com.cfish.rvb.bean.Message;
 import com.cfish.rvb.bean.MsgData;
 import com.cfish.rvb.bean.Reply;
+import com.cfish.rvb.bean.SiteDetails;
 import com.cfish.rvb.bean.Topic;
 import com.cfish.rvb.bean.User;
 
@@ -53,11 +54,18 @@ public class JsonParse {
 		return  article;
 	}
 
+
 	public static Details parseDetails(JSONObject resp) {
         JSONObject jsonData = resp.getJSONObject("data");
         Details details = JSON.parseObject(jsonData.toJSONString(),Details.class);
         return details;
     }
+
+	public static SiteDetails parseSiteDetails(JSONObject resp) {
+		JSONObject jsonData = resp.getJSONObject("data");
+		SiteDetails details = JSON.parseObject(jsonData.toJSONString(),SiteDetails.class);
+		return details;
+	}
 
 	public static User parseUser(JSONObject resp) {
 		User user = new User();

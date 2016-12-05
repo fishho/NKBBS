@@ -10,11 +10,13 @@
             android:title="小组" />
         <!--<item android:id="@+id/nv_friends" android:icon="@mipmap/ic_account_multiple"-->
             <!--android:title="动态" />-->
+        <item android:id="@+id/nv_post" android:icon="@mipmap/ic_pencil"
+        android:title="发帖" />
         <item android:id="@+id/nv_person" android:icon="@mipmap/ic_account"
             android:title="收藏" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="设置">
         <menu>
             <!--<item android:id="@+id/nv_setting" android:icon="@mipmap/ic_cog"-->
                 <!--android:title="设置" />-->

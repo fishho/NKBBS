@@ -74,13 +74,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (map == null) {
             return ;
         }
-        itemholder.head.setImageURI(Uri.parse(CommonData.siteCover+map.get("sid")+".jpg"));
+        //itemholder.head.setImageURI(Uri.parse(CommonData.siteCover+map.get("sid")+".jpg"));
         Log.d("Dfish", map.get("sid"));
         itemholder.title.setText(map.get("name"));
         itemholder.reply.setText(map.get("reply"));
         itemholder.author.setText(map.get("author"));
         itemholder.time.setText(map.get("creatime"));
+        String[] s = map.get("creatime").split("-",3);
+        itemholder.head.setImageURI(Uri.parse(CommonData.siteAvatar+s[0]+s[1]+"/"+map.get("s_a_id")+".jpg"));
         itemholder.signature.setText(map.get("signature"));
+        itemholder.itemView.setTag(map.get("s_a_id"));
     }
 
     @Override
