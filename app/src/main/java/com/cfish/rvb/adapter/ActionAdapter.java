@@ -3,6 +3,7 @@ package com.cfish.rvb.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.cfish.rvb.OnRecyclerViewItemClickListener;
 import com.cfish.rvb.R;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by GKX100217 on 2016/3/11.
@@ -42,8 +44,11 @@ public class ActionAdapter extends RecyclerView.Adapter implements View.OnClickL
         if (itemHolder == null) {
             return;
         }
-        String action = actionList.get(position).toString();
-        itemHolder.behavior.setText(action);
+        Map<String, String> action = (Map)actionList.get(position);
+        Log.d("AAAA",action.get("link"));
+        itemHolder.behavior.setOnClickListener(this);
+        itemHolder.behavior.setTag(action.get("link"));
+        itemHolder.behavior.setText(action.get("title"));
     }
 
     @Override
@@ -65,7 +70,8 @@ public class ActionAdapter extends RecyclerView.Adapter implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(mListener != null) {
-            mListener.onItemClick(v,"actions");
+            mListener.onItemClick(v,(String)v.getTag());
+            Log.d("hhhhh","TAG"+v.getTag());
         }
     }
 

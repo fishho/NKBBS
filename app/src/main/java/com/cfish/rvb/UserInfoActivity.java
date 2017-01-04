@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.cfish.rvb.adapter.ActionAdapter;
@@ -42,7 +43,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -182,12 +185,13 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.d(TAG, "personal page SS");
-                List<String> actionList = new ArrayList<String>();
+                List<Map> actionList = new ArrayList<>();
                 Document doc = Jsoup.parse(responseString);
                 Element head = doc.select("img.img-rounded").first();
                 Elements infos = doc.select("div.ui-content > p");
                 Elements my_news = doc.select("div.my_news");
                 Element unconcern = doc.getElementById("unconcern");
+
                 Elements privacys = doc.getElementsByClass("info_item");
                 String gender = privacys.get(0).text().substring(3);
                 Log.d(TAG, gender + (gender.equals("男")));
@@ -196,7 +200,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 } else if (gender.equals("女")) {
                     gender_img.setImageURI(Uri.parse("res:// /"+R.mipmap.ic_gender_female));
                 }
-                if (unconcern.hasText()){
+                if (unconcern.hasText() && !unconcern.attr("style").equals("display:none")){
                     fab.show();
                 } else {
                     fab.hide();
@@ -205,7 +209,20 @@ public class UserInfoActivity extends AppCompatActivity {
                 signature.setText(privacys.get(4).text());
                 score.setText(infos.get(1).text());
                 for (Element element : my_news) {
-                    actionList.add(element.text());
+                    Map<String,String> map = new HashMap<String, String>();
+                    map.put("title",element.text());
+                    Log.d(TAG, "aad"+map.get("title"));
+                    Elements links = element.getElementsByTag("a");
+                    for (Element link : links) {
+                        Log.d(TAG, "aaa"+link.text());
+                    }
+                    if (links.size()>1) {
+                        map.put("link",links.get(1).attr("href"));
+                    } else {
+                        map.put("link","");
+                    }
+
+                    actionList.add(map);
                     Log.d(TAG, "my_news" + element.text());
                 }
                 //doc.getElementsByClass("");
@@ -220,7 +237,22 @@ public class UserInfoActivity extends AppCompatActivity {
                 adaptera.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View v, String data) {
-                        Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
+
+                        if (data!=null &&data.contains("site")){
+                            Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
+                            String string = data.substring(data.lastIndexOf("/")+1,data.length());
+                            Toast.makeText(UserInfoActivity.this, string,Toast.LENGTH_SHORT).show();
+                        } else if (data!=null&& data.contains("wap")) {
+                            Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
+                            String string = data.substring(data.lastIndexOf("/")+1,data.length());
+                            Toast.makeText(UserInfoActivity.this, string,Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (data!=null) {
+                                Log.d("aaaaa",data);
+                            }
+                            Log.d("aaaaa","aaa+++aaa");
+                            Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
