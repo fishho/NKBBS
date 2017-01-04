@@ -39,10 +39,10 @@ line-height: 1.6em;
   font-size:10pt;
 }
 img {
-	max-width: 90%;
-	height: atuo;
+	max-width: 90% !important;
+	height: auto;
 	display: block;
-	margin: 2em atuo;
+	margin: 2em auto;
 	border: .1em solid #AB82FF;
 }
 @media screen and (-webkit-device-pixel-ratio:2) {

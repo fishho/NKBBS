@@ -58,14 +58,15 @@ public class GroupAdapter extends Adapter<ViewHolder> implements OnClickListener
     @Override
     public void onBindViewHolder(ViewHolder vh, int position) {
         // TODO Auto-generated method stub
-        String url = CommonData.groupCover+mGroups.get(position).getGid()+".jpg";
+        int mSize =mGroups.size()-1;
+        String url = CommonData.groupCover+mGroups.get(mSize-position).getGid()+".jpg";
         ItemHolder itemholder = (ItemHolder) vh;
         itemholder.draweeView.setImageURI(Uri.parse(url));
         Log.d("url",url);
         //this line can be optimised
-        itemholder.itemView.setTag(mGroups.get(position).getGid()+"`"+mGroups.get(position).getName());
+        itemholder.itemView.setTag(mGroups.get(mSize-position).getGid()+"`"+mGroups.get(mSize-position).getName());
 
-        itemholder.name.setText(mGroups.get(position).getName());
+        itemholder.name.setText(mGroups.get(mSize-position).getName());
     }
 
     @Override

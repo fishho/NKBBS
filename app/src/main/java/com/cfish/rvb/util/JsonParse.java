@@ -13,6 +13,7 @@ import com.cfish.rvb.bean.Message;
 import com.cfish.rvb.bean.MsgData;
 import com.cfish.rvb.bean.Reply;
 import com.cfish.rvb.bean.SiteDetails;
+import com.cfish.rvb.bean.SiteReply;
 import com.cfish.rvb.bean.Topic;
 import com.cfish.rvb.bean.User;
 
@@ -43,6 +44,15 @@ public class JsonParse {
 		JSONObject jsonData = resp.getJSONObject("data");
 		JSONArray jsonReply= jsonData.getJSONArray("reply");
         mReplys = JSON.parseArray(jsonReply.toJSONString(), Reply.class);
+		return mReplys;
+	}
+
+	public static List<SiteReply> parseSReplys(JSONObject resp) {
+		List<SiteReply> mReplys = new ArrayList<>();
+		SiteReply reply = new SiteReply();
+		JSONObject jsonData = resp.getJSONObject("data");
+		JSONArray jsonReply= jsonData.getJSONArray("reply");
+		mReplys = JSON.parseArray(jsonReply.toJSONString(), SiteReply.class);
 		return mReplys;
 	}
 

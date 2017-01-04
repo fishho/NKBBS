@@ -70,12 +70,16 @@
         <activity android:name=".MsgListActivity" />
         <activity android:name=".ActiveUserActivity" />
         <activity android:name=".NotificationListActivity" />
-        <activity android:name=".AboutActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/about"/>
-        <activity android:name=".ProfileActivity"
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/about"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileActivity"
             android:label="@string/myself" />
         <activity android:name=".GroupListActivity" />
+        <activity android:name=".SiteArticleActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

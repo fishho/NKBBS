@@ -81,7 +81,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         itemholder.author.setText(map.get("author"));
         itemholder.time.setText(map.get("creatime"));
         String[] s = map.get("creatime").split("-",3);
-        itemholder.head.setImageURI(Uri.parse(CommonData.siteAvatar+s[0]+s[1]+"/"+map.get("s_a_id")+".jpg"));
+        StringBuilder builder = new StringBuilder(CommonData.siteAvatar);
+        builder.append(s[0]).append(s[1]).append("/").append(map.get("s_a_id")).append(".jpg");
+        itemholder.head.setImageURI(builder.toString());
         itemholder.signature.setText(map.get("signature"));
         itemholder.itemView.setTag(map.get("s_a_id"));
     }

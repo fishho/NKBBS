@@ -1,7 +1,9 @@
 package com.cfish.rvb.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.cfish.rvb.R;
+import com.cfish.rvb.SiteArticleActivity;
 import com.cfish.rvb.adapter.NewsAdapter;
+import com.cfish.rvb.bean.SiteDetails;
 import com.cfish.rvb.util.CommonData;
 import com.cfish.rvb.util.HttpUtil;
+import com.cfish.rvb.util.JsonParse;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -153,27 +159,41 @@ public class SiteFragment extends Fragment {
                 adapter.setOnItemClickListener(new NewsAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View v, String data) {
-                        paramsTest = new RequestParams();
-                        paramsTest.add("uid","-1");
-                        paramsTest.add("reply_order", CommonData.user.getReply_order());
-                        paramsTest.add("type", "get_site_article");
-                        paramsTest.add("s_a_id", data);
-                        Log.d(TAG, "onItemClick: "+data);
-                        HttpUtil.post(CommonData.siteURL, paramsTest, new TextHttpResponseHandler() {
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                                Log.d(TAG, "onFailure: "+responseString);
-                            }
-
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                                  //  Log.d("DDDDD", responseString);
-                                if (responseString.length() > 4000){
-                                    Log.d("Dfish","Article part1"+responseString.length()+responseString.substring(0,4000));
-                                    Log.d("Dfish","Article part2"+responseString.substring(4000));
-                                }
-                            }
-                        });
+                        Intent intent = new Intent(getActivity(), SiteArticleActivity.class);
+                        intent.putExtra("s_a_id", data);
+                        getActivity().startActivity(intent);
+//                        paramsTest = new RequestParams();
+//                        paramsTest.add("uid","-1");
+//                        paramsTest.add("reply_order", CommonData.user.getReply_order());
+//                        paramsTest.add("type", "get_site_article");
+//                        paramsTest.add("s_a_id", data);
+//                        Log.d(TAG, "onItemClick: "+data);
+//                        HttpUtil.post(CommonData.siteURL, paramsTest, new TextHttpResponseHandler() {
+//                            @Override
+//                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                                Log.d(TAG, "onFailure: "+responseString);
+//                            }
+//
+//                            @Override
+//                            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//                                  //  Log.d("DDDDD", responseString);
+//                                if (responseString.length() > 4000){
+//                                    Log.d("Dfish","Article part1"+responseString.length()+responseString.substring(0,4000));
+//                                    Log.d("Dfish","Article part2"+responseString.substring(4000));
+//
+//                                    if (responseString.startsWith("<")) {
+//                                        responseString = responseString.substring(responseString.indexOf("{"),responseString.length());
+//                                    }
+//                                    com.alibaba.fastjson.JSONObject resp = com.alibaba.fastjson.JSON.parseObject(responseString);
+//                                    if (resp.getString("status").equals("0")) {
+//                                        Snackbar.make(view, "找不见了", Snackbar.LENGTH_SHORT).show();
+//                                    } else {
+//                                        SiteDetails details = JsonParse.parseSiteDetails(resp);
+//                                        Log.d("Dddd",details.getArticle().getContent());
+//                                    }
+//                                }
+//                            }
+//                        });
                     }
                 });
             }

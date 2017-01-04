@@ -187,6 +187,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 Element head = doc.select("img.img-rounded").first();
                 Elements infos = doc.select("div.ui-content > p");
                 Elements my_news = doc.select("div.my_news");
+                Element unconcern = doc.getElementById("unconcern");
                 Elements privacys = doc.getElementsByClass("info_item");
                 String gender = privacys.get(0).text().substring(3);
                 Log.d(TAG, gender + (gender.equals("男")));
@@ -194,6 +195,11 @@ public class UserInfoActivity extends AppCompatActivity {
                     gender_img.setImageURI(Uri.parse("res:// /" + R.mipmap.ic_gender_male));
                 } else if (gender.equals("女")) {
                     gender_img.setImageURI(Uri.parse("res:// /"+R.mipmap.ic_gender_female));
+                }
+                if (unconcern.hasText()){
+                    fab.show();
+                } else {
+                    fab.hide();
                 }
                 rank.setText(infos.get(2).text());
                 signature.setText(privacys.get(4).text());

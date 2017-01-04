@@ -5,10 +5,12 @@ package com.cfish.rvb.bean;
  */
 public class SiteReply {
     private String s_r_id;
+    private String user_id;
     private String s_a_id;
     private String p_s_r_id;
     private String creatime;
     private String content;
+    private Author user;
 
     public String getS_r_id() {
         return s_r_id;
@@ -48,5 +50,21 @@ public class SiteReply {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Author getUser() {
+        return user;
+    }
+
+    public void setUser(Author user) {
+        this.user = user;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }
