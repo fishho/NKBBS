@@ -203,7 +203,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 if (unconcern.hasText() && !unconcern.attr("style").equals("display:none")){
                     fab.show();
                 } else {
-                    fab.hide();
+                    fab.setClickable(false);
                 }
                 rank.setText(infos.get(2).text());
                 signature.setText(privacys.get(4).text());
@@ -242,10 +242,21 @@ public class UserInfoActivity extends AppCompatActivity {
                             Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
                             String string = data.substring(data.lastIndexOf("/")+1,data.length());
                             Toast.makeText(UserInfoActivity.this, string,Toast.LENGTH_SHORT).show();
+                            Intent intentArticle = new Intent();
+                            intentArticle.setClass(UserInfoActivity.this,SiteArticleActivity.class);
+                            intentArticle.putExtra("title",string);
+                            intentArticle.putExtra("g_a_id",string);
+                            startActivity(intentArticle);
                         } else if (data!=null&& data.contains("wap")) {
                             Snackbar.make(v, data, Snackbar.LENGTH_SHORT).show();
                             String string = data.substring(data.lastIndexOf("/")+1,data.length());
                             Toast.makeText(UserInfoActivity.this, string,Toast.LENGTH_SHORT).show();
+                            Intent intentArticle = new Intent();
+                            intentArticle.setClass(UserInfoActivity.this,ArticleActivity.class);
+                            intentArticle.putExtra("title",string);
+                            intentArticle.putExtra("g_a_id",string);
+                            startActivity(intentArticle);
+
                         } else {
                             if (data!=null) {
                                 Log.d("aaaaa",data);

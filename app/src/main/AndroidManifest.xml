@@ -38,6 +38,9 @@
             android:label="@string/title_activity_article"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".SiteArticleActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".PostActivity"
             android:label="@string/title_activity_article"
             android:windowSoftInputMode="adjustResize" />
@@ -78,8 +81,7 @@
             android:name=".ProfileActivity"
             android:label="@string/myself" />
         <activity android:name=".GroupListActivity" />
-        <activity android:name=".SiteArticleActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

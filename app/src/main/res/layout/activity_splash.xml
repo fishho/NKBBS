@@ -9,10 +9,12 @@
          TextureView, etc. -->
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/welcome_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_width="331dp"
+        android:layout_height="219dp"
         android:layout_gravity="center_horizontal"
-        fresco:placeholderImage="@mipmap/logo">
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@mipmap/n18">
     </com.facebook.drawee.view.SimpleDraweeView>
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
@@ -25,5 +27,14 @@
         android:layout_gravity="center"
         android:textSize="24sp"
         android:textColor="@color/icons"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/logo"
+        android:layout_marginBottom="60dp"
+        android:layout_width="265dp"
+        android:layout_height="123dp"
+        android:layout_gravity="center_horizontal|bottom"
+        fresco:placeholderImage="@mipmap/logo">
+    </com.facebook.drawee.view.SimpleDraweeView>
 
 </FrameLayout>
